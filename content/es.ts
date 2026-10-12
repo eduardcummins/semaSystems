@@ -1,9 +1,9 @@
 import type { Dict } from "./types";
 
-// Spanish uses formal "usted". Ed to review before launch. [TODO ...] markers match en.ts.
+// Spanish (Spain), formal "usted". Mirrors en.ts key for key.
 export const es: Dict = {
   meta: {
-    title: "Sema Systems: agentes de IA que puede ver trabajar",
+    title: "Sema Systems: vea trabajar a sus agentes de IA",
     description: "Agentes de IA a medida para pequeñas empresas, presentados como un flujo que puede seguir paso a paso. Creados por Sema Systems.",
     ogLocale: "es_ES",
   },
@@ -160,23 +160,23 @@ export const es: Dict = {
     items: [
       {
         q: "¿Necesito conocimientos técnicos?",
-        a: "No. Usted describe la tarea con palabras sencillas y nosotros nos ocupamos de la parte técnica. Le mostramos el agente como un flujo visual, de modo que cualquier persona de su equipo puede seguir lo que hace y ver el resultado de cada paso.",
+        a: "No. Usted describe la tarea con palabras sencillas y nosotros nos ocupamos de la parte técnica. Verá el agente como un flujo visual que cualquier persona de su equipo puede seguir.",
       },
       {
         q: "¿Qué tareas puede hacer un agente?",
-        a: "Trabajo repetitivo y basado en reglas con documentos, correos y hojas de cálculo: leer PDF, extraer datos, clasificar mensajes, redactar respuestas, comprobar elementos contra una lista y archivar los resultados. Los ejemplos de arriba muestran seis. Si una persona lo hace siempre igual, un agente probablemente pueda ayudar.",
+        a: "Trabajo repetitivo y basado en reglas con documentos, correos y hojas de cálculo: leer, extraer, clasificar, redactar y archivar. Si una persona lo hace siempre igual, un agente probablemente pueda ayudar.",
       },
       {
         q: "¿Qué pasa si el agente se equivoca?",
-        a: "Usted puede ver dónde. El flujo muestra la entrada y la salida de cada paso, así que un fallo señala el paso exacto, por ejemplo un campo ausente en un documento. Además, todo agente incluye a una persona que revisa el resultado antes de darlo por bueno, de modo que los errores se detectan antes de llegar a un cliente o a sus registros.",
+        a: "El flujo muestra la entrada y la salida de cada paso, así que se ve dónde falló. Usted revisa cada resultado antes de darlo por bueno.",
       },
       {
         q: "¿Están seguros mis datos?",
-        a: "Solo usamos los datos que necesita cada flujo y acordamos cómo se tratan antes de construir nada. Dónde se procesan: [TODO: confirmar proveedor de alojamiento y región]. Proveedor del modelo de lenguaje: los documentos se envían a un modelo de lenguaje para que los lea, actualmente [TODO: confirmar proveedor, p. ej. Anthropic, y las condiciones contractuales, incluido si los datos se usan para entrenar]. Conservación: [TODO: confirmar durante cuánto tiempo se guardan entradas, salidas y registros, y cómo se eliminan]. RGPD del Reino Unido: actuamos por cuenta de usted como encargados del tratamiento, con un contrato escrito de tratamiento de datos [TODO: confirmar y enlazar el contrato]. Revisión humana: una persona comprueba el resultado antes de darlo por bueno, de modo que nada se ejecuta a ciegas.",
+        a: "Solo usamos los datos que necesita cada flujo y acordamos cómo se tratan antes de construir nada. Dónde se procesan los datos, qué proveedor de IA los lee y cuánto tiempo se conservan se detalla en el plan que le enviamos antes de empezar.",
       },
       {
         q: "¿Cómo empezamos?",
-        a: "Reserve una llamada gratuita. Hablaremos de un flujo y le diremos con honestidad si un agente le ayudaría. Si es así, le enviamos un plan y un diagrama del flujo antes de empezar cualquier trabajo.",
+        a: "Reserve una llamada gratuita. Hablamos de una tarea y le decimos con franqueza si un agente le ayudaría.",
       },
     ],
   },

@@ -41,6 +41,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     },
     {
       "@context": "https://schema.org",
+      "@type": "Service",
+      name: lang === "es" ? "Agentes de IA a medida para pequeñas empresas" : "Custom AI agents for small businesses",
+      serviceType: lang === "es" ? "Automatización de flujos de trabajo con IA" : "AI workflow automation",
+      description: d.hero.sub,
+      inLanguage: lang,
+      url: `${config.siteUrl}/${lang}`,
+      provider: { "@type": "Organization", name: "Sema Systems", url: config.siteUrl },
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       inLanguage: lang,
       mainEntity: d.faq.items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),

@@ -1,9 +1,9 @@
 import type { Dict } from "./types";
 
-// TODO markers in square brackets are deliberate placeholders for facts that must be confirmed before launch.
+// Plain-spoken, no hype. Pricing and timeframes live in content/engagement.ts; clients in content/proof.ts.
 export const en: Dict = {
   meta: {
-    title: "Sema Systems: AI agents you can see working",
+    title: "Sema Systems: AI agents you can watch work",
     description: "Bespoke AI agents for small businesses, shown as a workflow you can follow step by step. Built by Sema Systems.",
     ogLocale: "en_GB",
   },
@@ -160,23 +160,23 @@ export const en: Dict = {
     items: [
       {
         q: "Do I need technical knowledge?",
-        a: "No. You describe the task in plain words, and we handle the technical side. We show you the agent as a visual workflow, so anyone on your team can follow what it does and see the result of each step.",
+        a: "No. You describe the task in plain words and we handle the technical side. You see the agent as a visual workflow that anyone on your team can follow.",
       },
       {
         q: "What kind of tasks can an agent do?",
-        a: "Repetitive, rule-based work with documents, emails and spreadsheets: reading PDFs, extracting details, sorting and classifying messages, drafting replies, checking items against a list, and filing the results. The examples above show six. If a person does it the same way every time, an agent can probably help.",
+        a: "Repetitive, rule-based work with documents, emails and spreadsheets: reading, extracting, sorting, drafting and filing. If a person does it the same way every time, an agent can probably help.",
       },
       {
         q: "What happens when the agent gets something wrong?",
-        a: "You can see where. The workflow shows the input and output of every step, so a failure points to the exact step, such as a missing field in a document. Every agent also includes a person reviewing the output before it is relied on, so mistakes are caught before they reach a client or your records.",
+        a: "The workflow shows the input and output of every step, so you can see where it went wrong. You check every result before it is relied on.",
       },
       {
         q: "Is my data safe?",
-        a: "We only use the data a workflow needs, and we agree how it is handled before we build anything. Where it is processed: [TODO: confirm hosting provider and region]. LLM provider: documents are sent to a large language model to be read, currently [TODO: confirm provider, e.g. Anthropic, and the contract terms, including whether data is used for training]. Retention: [TODO: confirm how long inputs, outputs and logs are kept, and how they are deleted]. UK GDPR: we act on your instructions as a processor, under a written data processing agreement [TODO: confirm and link the DPA]. Human review: a person checks the output before it is relied on, so nothing is acted on blindly.",
+        a: "We only use the data a workflow needs, and agree how it is handled before we build anything. Where data is processed, which AI provider reads it and how long anything is kept are set out in the plan we send you before work starts.",
       },
       {
         q: "How do we get started?",
-        a: "Book a free call. We will talk through one workflow, and tell you honestly whether an agent would help. If it would, we send a plan and a workflow diagram before any work begins.",
+        a: "Book a free call. We talk through one task and tell you honestly whether an agent would help.",
       },
     ],
   },
