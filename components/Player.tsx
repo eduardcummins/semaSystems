@@ -214,7 +214,7 @@ function Run({ cfg, ui, lang, detail, reduced, compact }: { cfg: WfCfg; ui: UI; 
             </div>
             <div>
               <dt>{ui.tools}</dt>
-              <dd>{cfg.tools.join(", ")}</dd>
+              <dd>{cfg.tools.map((t) => (typeof t === "string" ? t : t[lang])).join(", ")}</dd>
             </div>
           </dl>
         </>

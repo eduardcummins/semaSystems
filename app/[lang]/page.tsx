@@ -5,7 +5,6 @@ import { bookHref, config } from "@/lib/config";
 import { isLocale } from "@/lib/i18n";
 import { BookLink } from "@/components/BookLink";
 import { ContactForm } from "@/components/ContactForm";
-import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { engagement } from "@/content/engagement";
 import { Header } from "@/components/Header";
@@ -86,7 +85,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="grid3">
             {d.outcomes.map((o) => (
               <div className="card" key={o.title}>
-                <h3>{o.title}</h3>
+                <h2 className="h3">{o.title}</h2>
                 <p>{o.text}</p>
               </div>
             ))}
@@ -137,7 +136,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         <section className="wrap section" id="faq">
           <h2>{d.faq.heading}</h2>
-          <Faq items={d.faq.items} />
+          <div className="faq">
+            {d.faq.items.map((f) => (
+              <details key={f.q}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
         </section>
 
         <section className="wrap section" id="contact">

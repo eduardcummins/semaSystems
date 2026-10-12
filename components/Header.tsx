@@ -51,8 +51,9 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
           ))}
         </nav>
         <div className="bar-right">
-          <a href={switchHref} onClick={onSwitch} onMouseEnter={withHash} onFocus={withHash} className="lang" lang={other} hrefLang={other} aria-label={other === "es" ? "Español" : "English"}>
+          <a href={switchHref} onClick={onSwitch} onMouseEnter={withHash} onFocus={withHash} className="lang" lang={other} hrefLang={other}>
             <b>{lang.toUpperCase()}</b> / {other.toUpperCase()}
+            <span className="sr-only"> {other === "es" ? "Español" : "English"}</span>
           </a>
           <BookLink href={book} location="nav" className="btn btn-sm">
             {nav.book}
