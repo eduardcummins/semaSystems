@@ -1,38 +1,48 @@
 "use client";
+
 import { useEffect, useRef } from "react";
 import { Logo } from "./Logo";
 
-const BIG = 160;
-
+/** Big centred logo that shrinks into the header logo, once per visit. */
 export function Intro() {
-  const logo = useRef<HTMLDivElement>(null);
-  const overlay = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const mark = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const root = document.documentElement;
-    const el = logo.current;
-    const bg = overlay.current;
-    if (root.dataset.intro !== "on" || !el || !bg) return;
-    try { sessionStorage.setItem("intro-seen", "1"); } catch {}
-    const target = document.getElementById("header-logo")?.getBoundingClientRect();
-    const place = (x: number, y: number, s: number) => (el.style.transform = `translate(${x}px, ${y}px) scale(${s})`);
-    place((innerWidth - BIG) / 2, (innerHeight - BIG * 0.83) / 2, 1);
-    const timers = [
-      setTimeout(() => {
-        el.style.transition = "transform 0.9s cubic-bezier(.7,0,.2,1)";
-        bg.style.transition = "opacity 0.7s ease 0.2s";
-        bg.style.opacity = "0";
-        if (target) place(target.left, target.top, target.width / BIG);
-      }, 700),
-      setTimeout(() => { delete root.dataset.intro; }, 1700),
-    ];
-    return () => timers.forEach(clearTimeout);
+    const html = document.documentElement;
+    const el = root.current;
+    const m = mark.current;
+    if (!el || !m) return;
+    const finish = () => {
+      html.dataset.intro = "done";
+      try {
+        sessionStorage.setItem("introSeen", "1");
+      } catch {}
+      el.remove();
+    };
+    if (html.dataset.intro !== "run") return finish();
+
+    const target = document.getElementById("header-logo");
+    if (!target) return finish();
+    const from = m.getBoundingClientRect();
+    const t = target.getBoundingClientRect();
+    // Switch from CSS centring to an explicit transform, then animate to the header slot.
+    m.style.cssText = `left:0;top:0;width:${from.width}px;transform:translate(${from.left}px,${from.top}px) scale(1);transition:none`;
+    void m.offsetWidth;
+    const timer = window.setTimeout(() => {
+      m.style.transition = "transform 800ms cubic-bezier(.65,0,.2,1)";
+      m.style.transform = `translate(${t.left}px,${t.top}px) scale(${t.width / from.width})`;
+      el.style.opacity = "0";
+      window.setTimeout(finish, 900);
+    }, 900);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="intro" aria-hidden="true">
-      <div ref={overlay} className="intro-bg" />
-      <div ref={logo} className="intro-logo"><Logo size={BIG} /></div>
+    <div className="intro" ref={root} aria-hidden>
+      <div className="intro-mark" ref={mark}>
+        <Logo size={150} />
+      </div>
     </div>
   );
 }

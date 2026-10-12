@@ -1,35 +1,78 @@
 "use client";
-import { useState } from "react";
-import type { Dict } from "@/content/en";
 
-export function ContactForm({ t }: { t: Dict["contact"] }) {
-  const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { Dict } from "@/content";
+
+export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
+  const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  // No-JS submissions come back here as ?sent=1 / ?error=1 (see /api/contact).
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (q.has("sent")) setState("success");
+    else if (q.has("error")) setState("error");
+  }, []);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setState("sending");
-    const data = Object.fromEntries(new FormData(e.currentTarget));
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
-      setState(res.ok ? "ok" : "error");
+      setState(res.ok ? "success" : "error");
+      if (res.ok) form.reset();
     } catch {
       setState("error");
     }
   }
 
-  if (state === "ok") return <p className="notice">{t.ok}</p>;
   return (
-    <form onSubmit={submit} className="form">
-      <label>{t.name}<input name="name" required autoComplete="name" /></label>
-      <label>{t.email}<input name="email" type="email" required autoComplete="email" /></label>
-      <label>{t.workflow}<textarea name="workflow" rows={3} required /></label>
-      <input name="website" tabIndex={-1} autoComplete="off" className="hp" aria-hidden="true" />
-      <button type="submit" disabled={state === "sending"}>{state === "sending" ? t.sending : t.send}</button>
-      {state === "error" && <p className="notice error">{t.error}</p>}
+    <form onSubmit={submit} method="post" action="/api/contact" className="form">
+      <input type="hidden" name="lang" value={lang} />
+      <label>
+        {d.name}
+        <input name="name" required autoComplete="name" maxLength={200} />
+      </label>
+      <label>
+        {d.company}
+        <input name="company" required autoComplete="organization" maxLength={200} />
+      </label>
+      <label className="full">
+        {d.email}
+        <input name="email" type="email" required autoComplete="email" maxLength={200} />
+      </label>
+      <label className="full">
+        <span>
+          {d.task} <span className="opt">({d.optional})</span>
+        </span>
+        <input name="task" maxLength={300} />
+      </label>
+      <label className="full">
+        <span>
+          {d.message} <span className="opt">({d.optional})</span>
+        </span>
+        <textarea name="message" rows={4} maxLength={2000} />
+      </label>
+      <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hp" />
+      <p className="full consent">
+        {d.consentBefore}
+        <Link href={`/${lang}/privacy`}>{d.consentLink}</Link>
+        {d.consentAfter}
+      </p>
+      <div className="full form-foot">
+        <button className="btn" disabled={state === "sending"}>
+          {state === "sending" ? d.sending : d.send}
+        </button>
+        <p role="status" className={state === "error" ? "err" : "ok"}>
+          {state === "success" && d.success}
+          {state === "error" && d.error}
+        </p>
+      </div>
     </form>
   );
 }

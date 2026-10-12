@@ -1,5 +1,7 @@
+import type { Locale } from "@/lib/i18n";
 import { en } from "./en";
 import { es } from "./es";
-import type { Locale } from "@/lib/i18n";
+import type { Dict } from "./types";
 
-export const dict = (lang: Locale) => (lang === "es" ? es : en);
+export const dictionaries: Record<Locale, Dict> = { en, es };
+export type { Dict };
