@@ -122,21 +122,11 @@ export const en: Dict = {
       },
     },
   },
-  problem: {
-    heading: "The problem, and what you get",
-    problemTitle: "The problem",
-    problem: [
-      "Skilled people spend hours a week copying details between emails, PDFs and spreadsheets.",
-      "Off-the-shelf automation breaks on real-world documents, and nobody can tell why.",
-      "AI that works as a black box is hard to trust with client work.",
-    ],
-    getTitle: "What you get",
-    get: [
-      "An agent built around your own workflow, not a generic template.",
-      "A visual workflow showing every step and its result.",
-      "A person reviewing the output, so you stay in control.",
-    ],
-  },
+  outcomes: [
+    { title: "Hours back every week", text: "The repetitive copying, sorting and chasing runs by itself, so your team gets its time back." },
+    { title: "Fewer copy-paste errors", text: "An agent follows the same steps every time, so typos and missed fields stop slipping through." },
+    { title: "Nothing happens without a check you control", text: "Every agent has a review step where you approve the result before it is relied on." },
+  ],
   examples: {
     heading: "Example workflows",
     intro: "Six ways an agent could work inside a business. Pick one and step through it.",

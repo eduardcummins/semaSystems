@@ -57,6 +57,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
+        <section className="wrap section" id="outcomes">
+          <div className="grid3">
+            {d.outcomes.map((o) => (
+              <div className="card" key={o.title}>
+                <h3>{o.title}</h3>
+                <p>{o.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="wrap section examples-player" id="examples">
           <h2>{d.examples.heading}</h2>
           <p className="lead">{d.examples.intro}</p>

@@ -122,21 +122,11 @@ export const es: Dict = {
       },
     },
   },
-  problem: {
-    heading: "El problema y lo que obtiene",
-    problemTitle: "El problema",
-    problem: [
-      "Personas cualificadas dedican horas cada semana a copiar datos entre correos, PDF y hojas de cálculo.",
-      "La automatización genérica falla con documentos reales y nadie sabe por qué.",
-      "Una IA que funciona como caja negra es difícil de confiar en el trabajo con clientes.",
-    ],
-    getTitle: "Lo que obtiene",
-    get: [
-      "Un agente construido en torno a su flujo de trabajo, no una plantilla genérica.",
-      "Un flujo visual que muestra cada paso y su resultado.",
-      "Una persona que revisa el resultado, para que usted mantenga el control.",
-    ],
-  },
+  outcomes: [
+    { title: "Horas libres cada semana", text: "Copiar, clasificar y reclamar se hace solo, y su equipo recupera ese tiempo." },
+    { title: "Menos errores de copiar y pegar", text: "Un agente sigue siempre los mismos pasos, así que dejan de colarse erratas y campos olvidados." },
+    { title: "Nada ocurre sin una revisión que usted controla", text: "Todo agente incluye un paso de revisión en el que usted aprueba el resultado antes de darlo por bueno." },
+  ],
   examples: {
     heading: "Flujos de ejemplo",
     intro: "Seis formas en que un agente podría trabajar dentro de una empresa. Elija una y recórrala paso a paso.",

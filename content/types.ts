@@ -33,7 +33,7 @@ export type Dict = {
     hint: string;
     items: Record<WfId, WfCopy>;
   };
-  problem: { heading: string; problemTitle: string; problem: string[]; getTitle: string; get: string[] };
+  outcomes: { title: string; text: string }[];
   examples: { heading: string; intro: string };
   faq: { heading: string; items: { q: string; a: string }[] };
   contact: {
