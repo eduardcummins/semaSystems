@@ -38,7 +38,7 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
 
   return (
     <header className={`header ${floating ? "header-float" : ""}`}>
-      <div className="bar">
+      <div className="bar wrap">
         <Link href={`/${lang}`} className="brand" aria-label={nav.home} id="header-logo">
           <Logo size={44} />
         </Link>
@@ -53,7 +53,7 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
           <a href={switchHref} onClick={onSwitch} onMouseEnter={withHash} onFocus={withHash} className="lang" lang={other} hrefLang={other} aria-label={other === "es" ? "Español" : "English"}>
             <b>{lang.toUpperCase()}</b> / {other.toUpperCase()}
           </a>
-          <BookLink href={book} className="btn btn-sm only-wide-inline">
+          <BookLink href={book} location="nav" className="btn btn-sm">
             {nav.book}
           </BookLink>
           <button className="menu-btn" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)} aria-label={open ? nav.close : nav.menu}>
@@ -67,7 +67,7 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
                 {label}
               </Link>
             ))}
-            <BookLink href={book} className="btn">
+            <BookLink href={book} location="nav-mobile" className="btn">
               {nav.book}
             </BookLink>
           </nav>

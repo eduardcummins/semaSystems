@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
+import { Analytics } from "@/components/Analytics";
 import { isLocale, locales } from "@/lib/i18n";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
@@ -49,7 +50,10 @@ export default async function RootLayout({ children, params }: { children: React
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

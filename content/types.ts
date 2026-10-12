@@ -2,44 +2,39 @@ import type { WfId } from "@/lib/workflows";
 
 export type NodeCopy = { title: string; tool: string; result: string; input: string; output: string };
 export type WfCopy = {
+  tab: string;
   title: string;
-  summary: string;
   sample: string;
-  timeSaved: string;
-  error?: string;
+  before: string;
+  after: string;
   nodes: Record<string, NodeCopy>;
 };
 
 export type Dict = {
   meta: { title: string; description: string; ogLocale: string };
   nav: { examples: string; faq: string; book: string; menu: string; close: string; home: string };
-  hero: {
-    title: string;
-    tagline: string;
-    primary: string;
-    secondary: string;
-  };
-  flow: { points: [string, string, string] };
-  workflows: {
-    illustrative: string;
-    caption: string;
+  hero: { title: string; sub: string; primary: string; secondary: string };
+  player: {
+    label: string;
     sample: string;
-    timeSaved: string;
-    hint: string;
-    input: string;
-    output: string;
-    pending: string;
-    person: string;
+    before: string;
+    after: string;
+    tools: string;
+    illustrative: string;
     play: string;
     pause: string;
     next: string;
     restart: string;
-    intro: string;
-    stepOf: string; // "Step {n} of {total}"
+    stepNow: string; // "Step {n} of {total}: {title}"
+    input: string;
+    output: string;
+    pending: string;
+    person: string;
+    hint: string;
     items: Record<WfId, WfCopy>;
   };
   problem: { heading: string; problemTitle: string; problem: string[]; getTitle: string; get: string[] };
-  examples: { heading: string; intro: string; open: string; steps: string; close: string };
+  examples: { heading: string; intro: string };
   faq: { heading: string; items: { q: string; a: string }[] };
   contact: {
     heading: string;

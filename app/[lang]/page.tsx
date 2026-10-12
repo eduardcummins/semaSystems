@@ -1,16 +1,14 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { bookHref, config } from "@/lib/config";
 import { isLocale } from "@/lib/i18n";
-import { heroWorkflow } from "@/lib/workflows";
 import { BookLink } from "@/components/BookLink";
 import { ContactForm } from "@/components/ContactForm";
-import { Examples } from "@/components/Examples";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Player } from "@/components/Player";
-import Link from "next/link";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -44,52 +42,25 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section className="hero wrap" id="top">
           <div className="hero-text">
             <h1>{d.hero.title}</h1>
-            <p className="tagline">{d.hero.tagline}</p>
+            <p className="sub">{d.hero.sub}</p>
             <div className="btns">
-              <BookLink href={book} className="btn">
+              <BookLink href={book} location="hero">
                 {d.hero.primary}
               </BookLink>
-              <Link href={`/${lang}#examples`} className="btn btn-ghost">
+              <Link href={`/${lang}#contact`} className="link" data-cta="hero-secondary">
                 {d.hero.secondary}
               </Link>
             </div>
           </div>
           <div className="hero-player">
-            <Player cfg={heroWorkflow} copy={d.workflows.items[heroWorkflow.id]} ui={d.workflows} lang={lang} />
-            <ul className="points">
-              {d.flow.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
+            <Player ui={d.player} lang={lang} compact />
           </div>
         </section>
 
-        <section className="wrap section" id="problem">
-          <h2>{d.problem.heading}</h2>
-          <div className="two">
-            <div className="card">
-              <h3>{d.problem.problemTitle}</h3>
-              <ul>
-                {d.problem.problem.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="card card-accent">
-              <h3>{d.problem.getTitle}</h3>
-              <ul>
-                {d.problem.get.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="wrap section" id="examples">
+        <section className="wrap section examples-player" id="examples">
           <h2>{d.examples.heading}</h2>
           <p className="lead">{d.examples.intro}</p>
-          <Examples d={d.examples} ui={d.workflows} lang={lang} />
+          <Player ui={d.player} lang={lang} tabs detail />
         </section>
 
         <section className="wrap section" id="faq">

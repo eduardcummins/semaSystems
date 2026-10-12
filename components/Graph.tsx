@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import { useId, type KeyboardEvent } from "react";
 
 export type NodeState = "idle" | "active" | "done" | "error";
 
@@ -13,7 +13,6 @@ export type GNode = {
   result?: string;
   duration?: string;
   num?: number;
-  badge?: string; // shown instead of a duration, e.g. for the person-review step
   human?: boolean;
 };
 export type GEdge = { from: string; to: string; d: string };
@@ -39,6 +38,7 @@ type Props = {
 };
 
 export function Graph({ layout, states = {}, selected, onSelect, label, className }: Props) {
+  const uid = useId().replace(/:/g, "");
   const st = (id: string): NodeState => states[id] ?? "idle";
   const key = (e: KeyboardEvent, id: string) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -55,17 +55,18 @@ export function Graph({ layout, states = {}, selected, onSelect, label, classNam
       aria-label={label}
     >
       <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker id={`${uid}-idle`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1.5L8 5L1 8.5" fill="none" stroke="var(--line-strong)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+        <marker id={`${uid}-on`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M1 1.5L8 5L1 8.5" fill="none" stroke="context-stroke" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         </marker>
       </defs>
       {layout.edges.map((e) => (
-        <path
-          key={e.from + e.to}
-          d={e.d}
-          className={`edge ${states[e.from] === "done" ? "edge-on" : ""}`}
-          markerEnd="url(#arrow)"
-        />
+        <g key={e.from + e.to} className={states[e.from] === "done" ? "edge-on" : ""}>
+          <path d={e.d} className="edge" markerEnd={`url(#${uid}-idle)`} />
+          <path d={e.d} className="edge-fill" pathLength={1} markerEnd={`url(#${uid}-on)`} />
+        </g>
       ))}
       {layout.nodes.map((n) => {
         const s = st(n.id);
@@ -110,10 +111,11 @@ export function Graph({ layout, states = {}, selected, onSelect, label, classNam
                 {n.result}
               </text>
             )}
-            {n.badge && (
-              <text className="node-dur" x={n.w - 14} y={26} textAnchor="end">
-                {n.badge}
-              </text>
+            {n.human && (
+              <g aria-hidden className="node-person-icon">
+                <circle className="node-person" cx={n.w - 24} cy={20} r={4.5} />
+                <path className="node-person" d={`M${n.w - 34} 36c0-6 4.5-9 10-9s10 3 10 9`} />
+              </g>
             )}
             {n.duration && s === "done" && (
               <text className="node-dur" x={n.w - 14} y={26} textAnchor="end">
