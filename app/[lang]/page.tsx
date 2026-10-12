@@ -7,7 +7,9 @@ import { BookLink } from "@/components/BookLink";
 import { ContactForm } from "@/components/ContactForm";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
+import { engagement } from "@/content/engagement";
 import { Header } from "@/components/Header";
+import { Proof } from "@/components/Proof";
 import { Player } from "@/components/Player";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -15,6 +17,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   if (!isLocale(lang)) notFound();
   const d = dictionaries[lang];
   const book = bookHref(lang);
+  const priced = engagement.pilotPrice && engagement.retainer;
+  const cta = (location: string) => (
+    <div className="wrap">
+      <div className="cta-band">
+        <p>{d.cta.line}</p>
+        <BookLink href={book} location={location}>
+          {d.hero.primary}
+        </BookLink>
+      </div>
+    </div>
+  );
 
   const jsonLd = [
     {
@@ -57,6 +70,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
+        <Proof lang={lang} />
+
         <section className="wrap section" id="outcomes">
           <div className="grid3">
             {d.outcomes.map((o) => (
@@ -68,10 +83,46 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
+        <section className="wrap section" id="how">
+          <h2>{d.how.heading}</h2>
+          <ol className="steps">
+            {d.how.steps.map((st, i) => (
+              <li key={st.title}>
+                <h3>{st.title}</h3>
+                <p>{st.text}</p>
+                {engagement.timeframes[i] && <span className="time">{engagement.timeframes[i]}</span>}
+              </li>
+            ))}
+          </ol>
+        </section>
+
         <section className="wrap section examples-player" id="examples">
           <h2>{d.examples.heading}</h2>
           <p className="lead">{d.examples.intro}</p>
           <Player ui={d.player} lang={lang} tabs detail />
+        </section>
+
+        {cta("after-examples")}
+
+        <section className="wrap section safe" id="safe">
+          <h2>{d.safe.heading}</h2>
+          <div className="grid3">
+            {d.safe.items.map((it) => (
+              <div className="card" key={it.title}>
+                <h3>{it.title}</h3>
+                <p>{it.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {cta("after-safety")}
+
+        <section className="wrap section" id="pricing">
+          <div className="engage">
+            <h2 className="sr-only">{d.engagement.heading}</h2>
+            <p>{priced ? d.engagement.priced.replace("{pilot}", engagement.pilotPrice!).replace("{retainer}", engagement.retainer!) : d.engagement.fixed}</p>
+          </div>
         </section>
 
         <section className="wrap section" id="faq">

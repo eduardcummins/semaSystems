@@ -127,10 +127,33 @@ export const es: Dict = {
     { title: "Menos errores de copiar y pegar", text: "Un agente sigue siempre los mismos pasos, así que dejan de colarse erratas y campos olvidados." },
     { title: "Nada ocurre sin una revisión que usted controla", text: "Todo agente incluye un paso de revisión en el que usted aprueba el resultado antes de darlo por bueno." },
   ],
+  how: {
+    heading: "Cómo funciona",
+    steps: [
+      { title: "Llamada gratuita", text: "Conocemos una tarea que le quita tiempo y le decimos con franqueza si un agente le ayudaría." },
+      { title: "La esquematizamos", text: "Usted ve el flujo antes de que construyamos nada y acordamos qué debe hacer el agente." },
+      { title: "Piloto", text: "El agente trabaja con tareas reales mientras usted revisa cada resultado." },
+      { title: "Entrega", text: "Lo supervisamos y lo ajustamos a medida que cambie su forma de trabajar." },
+    ],
+  },
   examples: {
     heading: "Flujos de ejemplo",
     intro: "Seis formas en que un agente podría trabajar dentro de una empresa. Elija una y recórrala paso a paso.",
   },
+  safe: {
+    heading: "Por qué es seguro",
+    items: [
+      { title: "Revisión humana en cada resultado", text: "Una persona comprueba cada resultado antes de darlo por bueno, y el flujo muestra exactamente dónde falló algo." },
+      { title: "Sus datos son suyos", text: "Sus documentos y resultados siguen siendo suyos. Solo los usamos para ejecutar su flujo y acordamos cómo se tratan antes de construir." },
+      { title: "Cada paso queda registrado", text: "Cada ejecución guarda qué entró y qué salió en cada paso, para que pueda rastrear cualquier resultado." },
+    ],
+  },
+  engagement: {
+    heading: "Cuánto cuesta",
+    fixed: "Piloto a precio cerrado. Le presupuestamos tras la llamada gratuita.",
+    priced: "Piloto desde {pilot}, y después una cuota mensual de {retainer}.",
+  },
+  cta: { line: "Cuéntenos una tarea que le quite tiempo." },
   faq: {
     heading: "Preguntas frecuentes",
     items: [

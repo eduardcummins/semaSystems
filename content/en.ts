@@ -127,10 +127,33 @@ export const en: Dict = {
     { title: "Fewer copy-paste errors", text: "An agent follows the same steps every time, so typos and missed fields stop slipping through." },
     { title: "Nothing happens without a check you control", text: "Every agent has a review step where you approve the result before it is relied on." },
   ],
+  how: {
+    heading: "How it works",
+    steps: [
+      { title: "Free call", text: "We learn one painful task and tell you honestly whether an agent would help." },
+      { title: "We map it", text: "You see the workflow before we build anything, and agree what the agent should do." },
+      { title: "Pilot", text: "The agent runs on real work while you review every result." },
+      { title: "Handover", text: "We monitor it and adjust as your process changes." },
+    ],
+  },
   examples: {
     heading: "Example workflows",
     intro: "Six ways an agent could work inside a business. Pick one and step through it.",
   },
+  safe: {
+    heading: "Why it's safe",
+    items: [
+      { title: "Human review on every output", text: "A person checks each result before it is relied on, and the workflow shows exactly where something went wrong." },
+      { title: "You own your data", text: "Your documents and results stay yours. We only use them to run your workflow, and we agree how they are handled before we build." },
+      { title: "Every step is logged", text: "Each run records what went in and what came out at every step, so you can trace any result back." },
+    ],
+  },
+  engagement: {
+    heading: "What it costs",
+    fixed: "Fixed-price pilot. We quote after the free call.",
+    priced: "Pilot from {pilot}, then a monthly retainer of {retainer}.",
+  },
+  cta: { line: "Tell us one task that eats your time." },
   faq: {
     heading: "FAQ",
     items: [

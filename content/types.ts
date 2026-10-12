@@ -34,7 +34,11 @@ export type Dict = {
     items: Record<WfId, WfCopy>;
   };
   outcomes: { title: string; text: string }[];
+  how: { heading: string; steps: { title: string; text: string }[] };
   examples: { heading: string; intro: string };
+  safe: { heading: string; items: { title: string; text: string }[] };
+  engagement: { heading: string; fixed: string; priced: string }; // priced uses {pilot} and {retainer}
+  cta: { line: string };
   faq: { heading: string; items: { q: string; a: string }[] };
   contact: {
     heading: string;
