@@ -43,16 +43,15 @@ export type Dict = {
   contact: {
     heading: string;
     intro: string;
-    name: string;
-    company: string;
     email: string;
     task: string;
-    message: string;
     optional: string;
     send: string;
     sending: string;
     success: string;
     error: string;
+    bookFirst: string;
+    orSend: string;
     consentBefore: string;
     consentLink: string;
     consentAfter: string;

@@ -136,7 +136,18 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <h2>{d.contact.heading}</h2>
               <p className="lead">{d.contact.intro}</p>
             </div>
-            <ContactForm d={d.contact} lang={lang} />
+            <div>
+              {config.bookingUrl && (
+                <div className="book-first">
+                  <BookLink href={config.bookingUrl} location="contact">
+                    {d.hero.primary}
+                  </BookLink>
+                  <p className="muted">{d.contact.bookFirst}</p>
+                  <p className="muted">{d.contact.orSend}</p>
+                </div>
+              )}
+              <ContactForm d={d.contact} lang={lang} />
+            </div>
           </div>
         </section>
       </main>

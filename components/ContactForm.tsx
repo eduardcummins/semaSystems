@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Dict } from "@/content";
+import { track } from "@/lib/analytics";
 
 export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  // No-JS submissions come back here as ?sent=1 / ?error=1 (see /api/contact).
+  // Submissions made without JavaScript come back here as ?sent=1 / ?error=1 (see /api/contact).
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     if (q.has("sent")) setState("success");
@@ -25,7 +26,10 @@ export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
         body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
       setState(res.ok ? "success" : "error");
-      if (res.ok) form.reset();
+      if (res.ok) {
+        track("form_submit", { lang });
+        form.reset();
+      }
     } catch {
       setState("error");
     }
@@ -35,36 +39,22 @@ export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
     <form onSubmit={submit} method="post" action="/api/contact" className="form">
       <input type="hidden" name="lang" value={lang} />
       <label>
-        {d.name}
-        <input name="name" required autoComplete="name" maxLength={200} />
-      </label>
-      <label>
-        {d.company}
-        <input name="company" required autoComplete="organization" maxLength={200} />
-      </label>
-      <label className="full">
         {d.email}
         <input name="email" type="email" required autoComplete="email" maxLength={200} />
       </label>
-      <label className="full">
+      <label>
         <span>
           {d.task} <span className="opt">({d.optional})</span>
         </span>
-        <input name="task" maxLength={300} />
-      </label>
-      <label className="full">
-        <span>
-          {d.message} <span className="opt">({d.optional})</span>
-        </span>
-        <textarea name="message" rows={4} maxLength={2000} />
+        <textarea name="task" rows={4} maxLength={2000} />
       </label>
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hp" />
-      <p className="full consent">
+      <p className="consent">
         {d.consentBefore}
         <Link href={`/${lang}/privacy`}>{d.consentLink}</Link>
         {d.consentAfter}
       </p>
-      <div className="full form-foot">
+      <div className="form-foot">
         <button className="btn" disabled={state === "sending"}>
           {state === "sending" ? d.sending : d.send}
         </button>
