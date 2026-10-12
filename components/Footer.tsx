@@ -3,6 +3,7 @@ import type { Dict } from "@/content";
 import type { Locale } from "@/lib/i18n";
 import { config } from "@/lib/config";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer({ lang, d }: { lang: Locale; d: Dict["footer"] }) {
   return (
@@ -19,6 +20,7 @@ export function Footer({ lang, d }: { lang: Locale; d: Dict["footer"] }) {
             <a href={config.linkedin} target="_blank" rel="noopener noreferrer">
               {d.linkedin}
             </a>
+            <ThemeToggle light={d.themeLight} dark={d.themeDark} />
           </nav>
         </div>
         <p className="legal-line">{d.legalLine}</p>

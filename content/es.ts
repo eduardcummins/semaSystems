@@ -194,6 +194,8 @@ export const es: Dict = {
     consentAfter: ".",
   },
   footer: {
+    themeLight: "Tema claro",
+    themeDark: "Tema oscuro",
     tagline: "Agentes de IA que puede ver trabajar.",
     privacy: "Política de privacidad",
     legal: "Aviso legal",

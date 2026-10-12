@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
 import { isLocale, locales } from "@/lib/i18n";
-import { Intro } from "@/components/Intro";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 
 export const viewport: Viewport = { themeColor: "#f6f4ef" };
@@ -34,21 +34,22 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 }
 
-// Decides before first paint whether the logo intro plays (once per visit, never with reduced motion).
-const introScript = `try{var h=document.documentElement;h.dataset.intro=(sessionStorage.getItem("introSeen")||matchMedia("(prefers-reduced-motion: reduce)").matches)?"skip":"run"}catch(e){document.documentElement.dataset.intro="skip"}`;
+// Self-hosted at build time by next/font, with automatic size-adjusted fallbacks to avoid layout shift.
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const mono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains", weight: ["400", "600"] });
+
+// Applies a saved light/dark choice before first paint; with no choice the CSS follows the system setting.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body suppressHydrationWarning>
-        <Intro />
-        {children}
-      </body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

@@ -58,6 +58,6 @@ export type Dict = {
     consentLink: string;
     consentAfter: string;
   };
-  footer: { tagline: string; privacy: string; legal: string; linkedin: string; legalLine: string };
+  footer: { themeLight: string; themeDark: string; tagline: string; privacy: string; legal: string; linkedin: string; legalLine: string };
   placeholder: { privacyTitle: string; legalTitle: string; text: string; back: string };
 };
