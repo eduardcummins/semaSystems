@@ -8,9 +8,10 @@ export const es: Dict = {
     ogLocale: "es_ES",
   },
   nav: {
+    how: "Cómo funciona",
     examples: "Ejemplos",
     faq: "Preguntas",
-    book: "Reservar llamada",
+    book: "Reservar una llamada gratuita",
     menu: "Menú",
     close: "Cerrar menú",
     home: "Inicio de Sema Systems",

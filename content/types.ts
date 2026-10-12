@@ -12,7 +12,7 @@ export type WfCopy = {
 
 export type Dict = {
   meta: { title: string; description: string; ogLocale: string };
-  nav: { examples: string; faq: string; book: string; menu: string; close: string; home: string };
+  nav: { how: string; examples: string; faq: string; book: string; menu: string; close: string; home: string };
   hero: { title: string; sub: string; primary: string; secondary: string };
   player: {
     label: string;

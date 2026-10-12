@@ -9,19 +9,20 @@ import { BookLink } from "./BookLink";
 import { Logo } from "./Logo";
 
 export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; book: string }) {
-  const [floating, setFloating] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const other: Locale = lang === "en" ? "es" : "en";
 
   useEffect(() => {
-    const on = () => setFloating(window.scrollY > 40);
+    const on = () => setScrolled(window.scrollY > 4);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
 
   const links: [string, string][] = [
+    ["how", nav.how],
     ["examples", nav.examples],
     ["faq", nav.faq],
   ];
@@ -37,7 +38,7 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
   };
 
   return (
-    <header className={`header ${floating ? "header-float" : ""}`}>
+    <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
       <div className="bar wrap">
         <Link href={`/${lang}`} className="brand" aria-label={nav.home} id="header-logo">
           <Logo size={44} />
