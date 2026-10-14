@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { config } from "@/lib/config";
 import { locales } from "@/lib/i18n";
 
-const pages = ["", "/privacy", "/legal"];
+const pages = ["", "/privacy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return pages.flatMap((page) =>

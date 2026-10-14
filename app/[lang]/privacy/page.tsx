@@ -9,24 +9,27 @@ import { Header } from "@/components/Header";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  return { title: `${dictionaries[lang].placeholder.privacyTitle} | Sema Systems`, alternates: { canonical: `/${lang}/privacy`, languages: { en: "/en/privacy", es: "/es/privacy", "x-default": "/en/privacy" } } };
+  return {
+    title: `${dictionaries[lang].placeholder.privacyTitle} | Sema Systems`,
+    alternates: { canonical: `/${lang}/privacy`, languages: { en: "/en/privacy", es: "/es/privacy", "x-default": "/en/privacy" } },
+  };
 }
 
-export default async function Placeholder({ params }: { params: Promise<{ lang: string }> }) {
+export default async function Privacy({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const d = dictionaries[lang];
   return (
     <>
       <Header lang={lang} nav={d.nav} book={bookHref(lang)} />
-      <main className="wrap section placeholder">
-        <h1>{d.placeholder.privacyTitle}</h1>
+      <main className="wrap narrow page">
+        <h1 className="display h2">{d.placeholder.privacyTitle}</h1>
         <p className="lead">{d.placeholder.text}</p>
-        <Link href={`/${lang}`} className="btn">
-          {d.placeholder.back}
+        <Link href={`/${lang}`} className="text-link">
+          <span aria-hidden="true">←</span> {d.placeholder.back}
         </Link>
       </main>
-      <Footer lang={lang} d={d.footer} />
+      <Footer lang={lang} d={d.footer} nav={d.nav} />
     </>
   );
 }
