@@ -1,62 +1,138 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { dictionaries } from "@/content";
+import { config } from "@/lib/config";
+import { isLocale } from "@/lib/i18n";
 import { ContactForm } from "@/components/ContactForm";
-import { dict } from "@/content";
-import { workflows } from "@/content/workflows";
-import { contactEmail, isLocale } from "@/lib/i18n";
+import { Examples } from "@/components/Examples";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { HeroVisual } from "@/components/HeroVisual";
+import { HowItWorks } from "@/components/HowItWorks";
+import { Intro } from "@/components/Intro";
+import { IntroName } from "@/components/IntroName";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const t = dict(lang);
+  const d = dictionaries[lang];
+  const faq = d.faq.items.filter((f): f is { q: string; a: string } => f.a !== null);
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Sema Systems",
+      legalName: "Innovation Partners Ltd",
+      url: config.siteUrl,
+      email: config.contactEmail,
+      sameAs: [config.linkedin],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: lang === "es" ? "Agentes de IA a medida" : "Bespoke AI agents",
+      serviceType: lang === "es" ? "Automatización de flujos de trabajo con IA" : "AI workflow automation",
+      description: d.hero.sub,
+      inLanguage: lang,
+      url: `${config.siteUrl}/${lang}`,
+      provider: { "@type": "Organization", name: "Sema Systems", url: config.siteUrl },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: lang,
+      mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
 
   return (
-    <main>
-      <section className="hero">
-        <h1>{t.hero.title}</h1>
-        <p className="lead">{t.hero.sub}</p>
-        <a className="btn" href="#contact">{t.hero.cta}</a>
-      </section>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <Intro />
+      <Header lang={lang} nav={d.nav} />
+      <main>
+        <section className="hero wrap" id="top">
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="hero-copy">
+            <p className="hero-brand rise" style={{ "--d": -4 } as React.CSSProperties}>
+              Sema Systems
+            </p>
+            <div className="hero-title">
+              <IntroName />
+              <h1 className="display">
+                {d.hero.title.split(" ").map((w, i) => (
+                  <span key={i}>
+                    {i > 0 && " "}
+                    <span className="word" style={{ "--i": i } as React.CSSProperties}>
+                      {w}
+                    </span>
+                  </span>
+                ))}
+              </h1>
+            </div>
+            <p className="hero-sub rise" style={{ "--d": 0 } as React.CSSProperties}>
+              {d.hero.sub}
+            </p>
+            <p className="hero-audience rise" style={{ "--d": 1 } as React.CSSProperties}>
+              {d.hero.audience}
+            </p>
+            <div className="hero-ctas rise" style={{ "--d": 2 } as React.CSSProperties}>
+              <Link href={`/${lang}#contact`} className="pill">
+                {d.nav.contact}
+              </Link>
+            </div>
+          </div>
+          <div className="hero-visual rise" style={{ "--d": 3 } as React.CSSProperties}>
+            <HeroVisual v={d.hero.visual} />
+            <p className="hero-caption">{d.hero.visual.caption}</p>
+          </div>
+        </section>
 
-      <section id="workflows" className="section">
-        <h2>{t.workflows.title}</h2>
-        <p className="muted">{t.workflows.intro}</p>
-        <div className="cards">
-          {workflows(lang).map((w) => (
-            <Link key={w.slug} href={`/${lang}/workflows/${w.slug}`} className="card">
-              <span className="tag">{w.sector}{w.placeholder && ` · ${t.workflows.placeholder}`}</span>
-              <h3>{w.title}</h3>
-              <p>{w.summary}</p>
-              <span className="more">{t.workflows.view} →</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+        <HowItWorks d={d.how} />
 
-      <section id="how" className="section">
-        <h2>{t.how.title}</h2>
-        <ol className="steps">
-          {t.how.steps.map((s, i) => (
-            <li key={i}><span className="num">{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>
-          ))}
-        </ol>
-      </section>
+        <section className="section wrap" id="examples" aria-labelledby="examples-title">
+          <div className="section-head">
+            <div>
+              <h2 className="display h2" id="examples-title">
+                {d.examples.heading}
+              </h2>
+              <p className="lead">{d.examples.sub}</p>
+            </div>
+            <span className="tag">{d.examples.illustrative}</span>
+          </div>
+          <Examples d={d.examples} />
+        </section>
 
-      <section id="about" className="section narrow">
-        <h2>{t.about.title}</h2>
-        {t.about.body.map((p, i) => <p key={i}>{p}</p>)}
-      </section>
+        <section className="section wrap narrow" id="faq" aria-labelledby="faq-title">
+          <h2 className="display h2" id="faq-title">
+            {d.faq.heading}
+          </h2>
+          <div className="faq">
+            {faq.map((f) => (
+              <details key={f.q} name="faq">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
 
-      <section id="contact" className="section narrow">
-        <h2>{t.contact.title}</h2>
-        <p className="muted">{t.contact.intro}</p>
-        <ContactForm t={t.contact} />
-        <p className="muted">{t.contact.direct} <a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
-      </section>
-
-      <footer className="footer">
-        <span>© {new Date().getFullYear()} {t.footer.rights}</span>
-      </footer>
-    </main>
+        <section className="section wrap closing" id="contact" aria-labelledby="closing-title">
+          <h2 className="display h2" id="closing-title">
+            {d.closing.title}
+          </h2>
+          <p className="lead">{d.closing.sub}</p>
+          <div className="contact" id="contact-form">
+            <ContactForm d={d.contact} lang={lang} />
+          </div>
+          <p className="closing-email">
+            {d.closing.email}{" "}
+            <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
+          </p>
+        </section>
+      </main>
+      <Footer lang={lang} d={d.footer} nav={d.nav} />
+    </>
   );
 }
