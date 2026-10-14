@@ -4,14 +4,13 @@ export type ExampleId = "invoices" | "inbox" | "chasing" | "contracts" | "submis
 export type ExampleCfg = {
   id: ExampleId;
   check: number; // index of the step a person does ("You check this")
-  tools: string[]; // product names only
 };
 
 export const examples: ExampleCfg[] = [
-  { id: "invoices", check: 3, tools: ["Gmail", "Google Sheets", "Xero"] },
-  { id: "inbox", check: 3, tools: ["Gmail", "Outlook"] },
-  { id: "chasing", check: 3, tools: ["Gmail", "Google Sheets"] },
-  { id: "contracts", check: 3, tools: ["Outlook", "SharePoint"] },
-  { id: "submission", check: 3, tools: ["Outlook", "Excel"] },
-  { id: "briefing", check: 3, tools: ["Google Alerts", "Gmail"] },
+  { id: "invoices", check: 3 },
+  { id: "inbox", check: 3 },
+  { id: "chasing", check: 3 },
+  { id: "contracts", check: 3 },
+  { id: "submission", check: 3 },
+  { id: "briefing", check: 3 },
 ];

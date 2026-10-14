@@ -111,8 +111,8 @@ a {
 }
 
 .section {
-  padding-top: clamp(88px, 11vw, 160px);
-  padding-bottom: clamp(88px, 11vw, 160px);
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(64px, 8vw, 112px);
 }
 
 .display {
@@ -385,8 +385,8 @@ h1.display {
   gap: 64px;
   align-items: center;
   min-height: min(100svh, 980px);
-  padding-top: calc(var(--header-h) + 56px);
-  padding-bottom: 72px;
+  padding-top: calc(var(--header-h) + 48px);
+  padding-bottom: 48px;
 }
 
 @media (min-width: 960px) {
@@ -429,7 +429,17 @@ h1.display {
 
 .hero-visual {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-caption {
+  max-width: 440px;
+  margin: 18px 0 0;
+  font-size: 13.5px;
+  color: var(--faint);
+  text-align: center;
+  text-wrap: balance;
 }
 
 /* One soft, slow glow behind the product visual. */
@@ -486,9 +496,21 @@ h1.display {
 }
 
 .app-name {
+  white-space: nowrap;
   color: var(--fg);
   font-size: 14px;
   font-weight: 500;
+}
+
+.app-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--text);
 }
 
 .app-status {
@@ -507,6 +529,13 @@ h1.display {
   border-radius: 50%;
   background: var(--fg);
   opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .app-dots,
+  .app-status {
+    display: none;
+  }
 }
 
 .app-steps {
@@ -632,36 +661,89 @@ h1.display {
   }
 }
 
-/* ---------- How it works ---------- */
+/* ---------- How it works ----------
+ * The section is n x 60svh taller than the screen; its inner block stays pinned while you scroll through,
+ * and HowItWorks.tsx marks each plate and step as past, current or next. */
+.how-scroll {
+  position: relative;
+  height: calc(100svh + var(--n) * 60svh);
+}
+
+.how-pin {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100svh;
+  padding-top: var(--header-h);
+}
+
 .how {
   display: grid;
-  margin-top: clamp(48px, 7vw, 88px);
+  gap: 28px;
+  margin-top: clamp(24px, 5vh, 56px);
 }
 
 .how-plates {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.how-plate {
+  width: clamp(120px, 36vw, 170px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+/* On phones the plates overlap into a compact stack. */
+.how-plate + .how-plate {
+  margin-top: calc(clamp(120px, 36vw, 170px) * -0.22);
+}
+
+.how-plate[data-state="next"] {
+  opacity: 0;
+  transform: translateY(36px);
+}
+
+.how-text {
+  display: grid;
+  gap: 28px;
+  align-content: start;
 }
 
 .how-steps {
+  display: grid;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* All steps share one grid cell; only the current one shows, rising in from below. */
 .how-step {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 20px;
-  padding: 32px 0;
+  grid-area: 1 / 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.7s var(--ease);
 }
 
-.how-step + .how-step {
-  border-top: 1px solid var(--line);
+.how-step[data-state="past"] {
+  opacity: 0;
+  transform: translateY(-24px);
+  pointer-events: none;
+}
+
+.how-step[data-state="next"] {
+  opacity: 0;
+  transform: translateY(48px);
+  pointer-events: none;
 }
 
 .how-step h3 {
   margin-bottom: 10px;
-  font: 500 19px/1.3 var(--sans);
+  font: 500 clamp(19px, 1rem + 0.4vw, 22px) / 1.3 var(--sans);
 }
 
 .how-step p {
@@ -670,8 +752,8 @@ h1.display {
 
 .points {
   display: grid;
-  gap: 12px;
-  margin: 18px 0 0;
+  gap: 10px;
+  margin: 16px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -681,15 +763,102 @@ h1.display {
   font-weight: 500;
 }
 
+.how-progress {
+  display: flex;
+  gap: 6px;
+}
+
+.how-progress span {
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line-2);
+  transition: background 0.4s;
+}
+
+.how-progress span[data-on] {
+  background: var(--fg);
+}
+
+@media (min-width: 900px) {
+  .how {
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(48px, 7vw, 120px);
+    align-items: center;
+  }
+
+  .how-plate {
+    width: clamp(160px, calc((100svh - 300px) / 2), 300px);
+  }
+
+  .how-plate + .how-plate {
+    margin-top: 6px;
+  }
+}
+
+/* Plain list instead of the pinned sequence: reduced motion, short screens, or no JavaScript. */
+@media (prefers-reduced-motion: reduce), (max-height: 640px) {
+  .how-scroll {
+    height: auto;
+    padding: clamp(64px, 8vw, 112px) 0;
+  }
+
+  .how-pin {
+    position: static;
+    height: auto;
+    padding-top: 0;
+  }
+
+  .how-plate[data-state],
+  .how-step[data-state] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .how-step {
+    grid-area: auto;
+    padding: 24px 0;
+  }
+
+  .how-step + .how-step {
+    border-top: 1px solid var(--line);
+  }
+
+  .how-progress {
+    display: none;
+  }
+}
+
+:root:not([data-js]) .how-scroll {
+  height: auto;
+  padding: 96px 0;
+}
+
+:root:not([data-js]) .how-pin {
+  position: static;
+  height: auto;
+  padding-top: 0;
+}
+
+:root:not([data-js]) :is(.how-plate, .how-step)[data-state] {
+  opacity: 1;
+  transform: none;
+}
+
+:root:not([data-js]) .how-step {
+  grid-area: auto;
+  padding: 24px 0;
+}
+
+:root:not([data-js]) .how-progress {
+  display: none;
+}
+
 .plate {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-}
-
-.plate-sm {
-  margin-top: 4px;
 }
 
 .plate path,
@@ -726,63 +895,18 @@ h1.display {
   transition: fill 0.5s;
 }
 
-/* The plate for the step in view brightens (StepObserver sets data-active). */
-#how[data-active="0"] :is(.how-plates .plate:nth-child(1), [data-step="0"] .plate),
-#how[data-active="1"] :is(.how-plates .plate:nth-child(2), [data-step="1"] .plate),
-#how[data-active="2"] :is(.how-plates .plate:nth-child(3), [data-step="2"] .plate),
-#how[data-active="3"] :is(.how-plates .plate:nth-child(4), [data-step="3"] .plate) {
-  --lit: 1;
+/* The plate for the current step brightens. */
+.how-plate[data-state="current"] .plate-top {
+  fill: #121212;
+  stroke: rgba(255, 255, 255, 0.6);
 }
 
-.plate {
-  --lit: 0;
+.how-plate[data-state="current"] .plate-grid {
+  stroke: rgba(255, 255, 255, 0.16);
 }
 
-#how .plate .plate-top {
-  stroke: rgba(255, 255, 255, calc(0.22 + var(--lit) * 0.38));
-  fill: rgb(calc(10 + var(--lit) * 8) calc(10 + var(--lit) * 8) calc(10 + var(--lit) * 8));
-}
-
-#how .plate .plate-grid {
-  stroke: rgba(255, 255, 255, calc(0.07 + var(--lit) * 0.09));
-}
-
-#how .plate .plate-num {
-  fill: rgba(255, 255, 255, calc(0.5 + var(--lit) * 0.5));
-}
-
-@media (min-width: 900px) {
-  .how {
-    grid-template-columns: 1fr 1.1fr;
-    gap: clamp(48px, 7vw, 120px);
-    align-items: start;
-  }
-
-  .how-plates {
-    position: sticky;
-    top: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .how-plates .plate {
-    width: min(320px, calc((100vh - 200px) / 2));
-  }
-
-  .how-step {
-    display: block;
-    padding: 36px 0;
-  }
-
-  .how-step:first-child {
-    padding-top: 12px;
-  }
-
-  .plate-sm {
-    display: none;
-  }
+.how-plate[data-state="current"] .plate-num {
+  fill: var(--fg);
 }
 
 /* ---------- Example workflows ---------- */
@@ -794,7 +918,7 @@ h1.display {
 }
 
 .ex {
-  margin-top: 44px;
+  margin-top: 36px;
 }
 
 .seg {
@@ -847,14 +971,14 @@ h1.display {
 }
 
 .ex-panel {
-  margin-top: 40px;
-  padding-top: 40px;
+  margin-top: 32px;
+  padding-top: 32px;
   border-top: 1px solid var(--line);
 }
 
 .ex-problem {
   max-width: 46rem;
-  margin: 0 0 44px;
+  margin: 0 0 32px;
   color: var(--fg);
   font-size: clamp(20px, 1rem + 0.6vw, 24px);
   line-height: 1.4;
@@ -863,7 +987,7 @@ h1.display {
 .ex-steps {
   display: grid;
   gap: 14px;
-  margin: 0 0 52px;
+  margin: 0 0 36px;
   padding: 0;
   list-style: none;
 }
@@ -966,8 +1090,8 @@ h1.display {
 
 .ex-compare {
   display: grid;
-  gap: 28px;
-  margin: 0 0 44px;
+  gap: 24px;
+  margin: 0;
 }
 
 .ex-compare dd {
@@ -988,34 +1112,6 @@ h1.display {
     grid-template-columns: 1fr 1fr;
     gap: 56px;
   }
-}
-
-.ex-tools {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-}
-
-.ex-tools .label {
-  margin: 0;
-}
-
-.ex-tools ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ex-tools li {
-  padding: 4px 10px;
-  border: 1px solid var(--line-2);
-  border-radius: 999px;
-  color: var(--faint);
-  font-size: 12.5px;
 }
 
 /* ---------- FAQ ---------- */
@@ -1114,8 +1210,8 @@ h1.display {
 
 .contact {
   max-width: 520px;
-  margin: 88px auto 0;
-  padding-top: 48px;
+  margin: 56px auto 0;
+  padding-top: 40px;
   border-top: 1px solid var(--line);
   text-align: left;
 }

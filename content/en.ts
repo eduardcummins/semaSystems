@@ -21,20 +21,22 @@ export const en: Dict = {
   },
   hero: {
     title: "Agents you can watch work.",
-    sub: "Describe a task in plain words. We build an AI agent that does it inside the tools you already use, and show you every step so your team stays in control.",
+    sub: "Tell us about a task the way you'd explain it to a colleague. We build an AI agent that does it inside the tools you already use, and hand it over as a visual workflow, so your team can see every step and stay in control.",
     audience: "For accountancy firms, insurers and small teams.",
     primary: "Book a free call",
     secondary: "Send us a task",
     visual: {
       label: "Example: an agent called Invoice intake, shown as four steps. The last step waits for you to approve.",
       agent: "Invoice intake",
+      view: "Workflow",
       status: "Running",
       steps: ["New invoice arrives", "Reads the invoice", "Adds it to your sheet", "You approve"],
       log: "Today · 6 invoices processed · 1 waiting for you",
+      caption: "This is what you get: every agent as a workflow you can watch, step by step.",
     },
   },
   how: {
-    heading: "How it works.",
+    heading: "How it works",
     steps: [
       {
         title: "Your workflow",
@@ -42,14 +44,14 @@ export const en: Dict = {
       },
       {
         title: "The design",
-        text: "We map it as a workflow and agree what's worth automating, what to leave alone, and where a person should check the work.",
+        text: "We draw it as a visual workflow and agree what's worth automating, what to leave alone, and where a person should check the work.",
       },
       {
         title: "The build",
         text: "We build the agent in our own software and connect it to the tools you already use.",
         points: [
-          { lead: "Rules in code.", text: "Calculations, checks and routing run the same way every time." },
-          { lead: "AI only for judgment.", text: "Reading a document or drafting a reply, and it records why." },
+          { lead: "Fixed rules.", text: "Calculations, checks and routing follow set rules, so the result never varies." },
+          { lead: "AI where it helps.", text: "Reading a document or drafting a reply. Each decision is noted in the run log." },
           { lead: "You sign off.", text: "Nothing leaves the business without a person's approval unless you choose otherwise." },
         ],
       },
@@ -66,15 +68,14 @@ export const en: Dict = {
   },
   examples: {
     heading: "Example workflows",
-    sub: "Six tasks an agent could take off your desk.",
+    sub: "Six tasks an agent could take off your desk, each shown as the workflow you would see.",
     illustrative: "Illustrative",
     tabsLabel: "Choose an example",
     problem: "The problem",
-    does: "What the agent does",
+    does: "The workflow",
     check: "You check this",
     before: "Before",
     after: "After",
-    tools: "Works with",
     items: {
       invoices: {
         tab: "Invoices",

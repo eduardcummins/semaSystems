@@ -48,7 +48,7 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
         </nav>
         <div className="bar-end">
           <LangSwitch lang={lang} name={nav.language} />
-          <BookLink href={book} location="nav" className="pill pill-sm">
+          <BookLink href={book} className="pill pill-sm">
             {nav.book}
           </BookLink>
           <button type="button" className="menu-btn" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { Dict } from "@/content";
 import { examples, type ExampleId } from "@/lib/examples";
-import { track } from "@/lib/analytics";
 import { PersonIcon } from "./icons";
 
 /** Segmented control over the six examples. Steps light up once, in order, on first view and on every switch. */
@@ -39,10 +38,7 @@ export function Examples({ d }: { d: Dict["examples"] }) {
 
   const select = (i: number) => {
     const next = examples[(i + examples.length) % examples.length];
-    if (next.id !== id) {
-      setId(next.id);
-      track("example_switch", { example: next.id });
-    }
+    setId(next.id);
     tabs.current[examples.indexOf(next)]?.focus();
   };
 
@@ -107,15 +103,6 @@ export function Examples({ d }: { d: Dict["examples"] }) {
             <dd>{item.after}</dd>
           </div>
         </dl>
-
-        <div className="ex-tools">
-          <span className="label">{d.tools}</span>
-          <ul>
-            {cfg.tools.map((t) => (
-              <li key={t}>{t}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </div>
   );

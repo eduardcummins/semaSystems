@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import type { Dict } from "@/content";
-import { track } from "@/lib/analytics";
 
 type State = "idle" | "sending" | "success" | "error";
 const noop = () => () => {};
@@ -25,10 +24,7 @@ export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
         body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
       setState(res.ok ? "success" : "error");
-      if (res.ok) {
-        track("form_submit", { lang });
-        form.reset();
-      }
+      if (res.ok) form.reset();
     } catch {
       setState("error");
     }

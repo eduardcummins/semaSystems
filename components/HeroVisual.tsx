@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Dict } from "@/content";
-import { PersonIcon, CheckIcon } from "./icons";
+import { CheckIcon, FlowIcon, PersonIcon } from "./icons";
 
 // How long each step is shown: the three agent steps, then "You approve" waiting, then a short reset.
 const HOLD = [1300, 1300, 1300, 2800];
@@ -38,6 +38,9 @@ export function HeroVisual({ v }: { v: Dict["hero"]["visual"] }) {
       <div className="app-bar">
         <span className="app-dots" />
         <span className="app-name">{v.agent}</span>
+        <span className="app-view">
+          <FlowIcon /> {v.view}
+        </span>
         <span className="app-status">{v.status}</span>
       </div>
       <ol className="app-steps">

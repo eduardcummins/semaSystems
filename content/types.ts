@@ -17,7 +17,7 @@ export type Dict = {
     audience: string;
     primary: string;
     secondary: string;
-    visual: { label: string; agent: string; status: string; steps: string[]; log: string };
+    visual: { label: string; agent: string; view: string; status: string; steps: string[]; log: string; caption: string };
   };
   how: {
     heading: string;
@@ -33,7 +33,6 @@ export type Dict = {
     check: string;
     before: string;
     after: string;
-    tools: string;
     items: Record<ExampleId, ExampleCopy>;
   };
   // An answer of null hides the question until it is written (see the TODO next to it).

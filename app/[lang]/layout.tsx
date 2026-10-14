@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
-import { Analytics } from "@/components/Analytics";
 import { isLocale, locales } from "@/lib/i18n";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "../globals.css";
@@ -39,9 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 const sans = Inter({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-serif" });
 
+// data-js tells the CSS that scripts run (some sections fall back to a plain layout without them).
 // The home-page intro plays once per session, only on a fresh visit to /en or /es, never under reduced motion.
 // It only hides content with opacity, so the page is complete in the HTML and nothing shifts (see Intro.tsx).
-const introScript = `try{if(/^\\/(en|es)\\/?$/.test(location.pathname)&&!location.hash&&!sessionStorage.getItem("sema-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){sessionStorage.setItem("sema-intro","1");document.documentElement.setAttribute("data-intro","")}}catch(e){}`;
+const introScript = `document.documentElement.setAttribute("data-js","");try{if(/^\\/(en|es)\\/?$/.test(location.pathname)&&!location.hash&&!sessionStorage.getItem("sema-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){sessionStorage.setItem("sema-intro","1");document.documentElement.setAttribute("data-intro","")}}catch(e){}`;
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -53,7 +53,6 @@ export default async function RootLayout({ children, params }: { children: React
       </head>
       <body suppressHydrationWarning>
         {children}
-        <Analytics />
       </body>
     </html>
   );

@@ -14,3 +14,13 @@ export function CheckIcon() {
     </svg>
   );
 }
+
+export function FlowIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="5" height="4" rx="1" />
+      <rect x="9.5" y="10.5" width="5" height="4" rx="1" />
+      <path d="M4 5.5v3.5a1.5 1.5 0 0 0 1.5 1.5h4" strokeLinecap="round" />
+    </svg>
+  );
+}

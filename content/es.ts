@@ -21,20 +21,22 @@ export const es: Dict = {
   },
   hero: {
     title: "Agentes que puede ver trabajar.",
-    sub: "Describa una tarea con sus propias palabras. Creamos un agente de IA que la hace dentro de las herramientas que ya utiliza y le mostramos cada paso, para que su equipo mantenga el control.",
+    sub: "Cuéntenos una tarea como se la explicaría a un compañero. Creamos un agente de IA que la hace dentro de las herramientas que ya utiliza y se lo entregamos como un flujo visual, para que su equipo vea cada paso y mantenga el control.",
     audience: "Para asesorías, aseguradoras y equipos pequeños.",
     primary: "Reserve una llamada gratuita",
     secondary: "Envíenos una tarea",
     visual: {
       label: "Ejemplo: un agente llamado Registro de facturas, en cuatro pasos. El último espera a que usted lo apruebe.",
       agent: "Registro de facturas",
+      view: "Flujo",
       status: "En marcha",
       steps: ["Llega una factura nueva", "Lee la factura", "La añade a su hoja", "Usted la aprueba"],
       log: "Hoy · 6 facturas procesadas · 1 pendiente de usted",
+      caption: "Esto es lo que recibe: cada agente como un flujo que puede ver trabajar, paso a paso.",
     },
   },
   how: {
-    heading: "Cómo funciona.",
+    heading: "Cómo funciona",
     steps: [
       {
         title: "Su forma de trabajar",
@@ -42,14 +44,14 @@ export const es: Dict = {
       },
       {
         title: "El diseño",
-        text: "Lo plasmamos como un flujo de trabajo y acordamos qué merece la pena automatizar, qué conviene dejar como está y en qué punto debe revisarlo una persona.",
+        text: "Lo dibujamos como un flujo visual y acordamos qué merece la pena automatizar, qué conviene dejar como está y en qué punto debe revisarlo una persona.",
       },
       {
         title: "La construcción",
         text: "Construimos el agente con nuestro propio software y lo conectamos a las herramientas que ya utiliza.",
         points: [
-          { lead: "Reglas en el código.", text: "Los cálculos, las comprobaciones y el reparto del trabajo se hacen siempre igual." },
-          { lead: "IA solo donde hace falta criterio.", text: "Leer un documento o redactar una respuesta, y deja constancia del porqué." },
+          { lead: "Reglas fijas.", text: "Los cálculos, las comprobaciones y el reparto del trabajo siguen reglas fijas, así que el resultado no varía." },
+          { lead: "IA donde aporta.", text: "Leer un documento o redactar una respuesta. Cada decisión queda anotada en el registro." },
           { lead: "Usted da el visto bueno.", text: "Nada sale de la empresa sin la aprobación de una persona, salvo que usted decida lo contrario." },
         ],
       },
@@ -66,15 +68,14 @@ export const es: Dict = {
   },
   examples: {
     heading: "Flujos de ejemplo",
-    sub: "Seis tareas que un agente podría quitarle de encima.",
+    sub: "Seis tareas que un agente podría quitarle de encima, cada una tal y como vería su flujo.",
     illustrative: "Ilustrativo",
     tabsLabel: "Elija un ejemplo",
     problem: "El problema",
-    does: "Qué hace el agente",
+    does: "El flujo",
     check: "Lo revisa usted",
     before: "Antes",
     after: "Después",
-    tools: "Funciona con",
     items: {
       invoices: {
         tab: "Facturas",

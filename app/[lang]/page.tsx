@@ -9,10 +9,9 @@ import { Examples } from "@/components/Examples";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeroVisual } from "@/components/HeroVisual";
+import { HowItWorks } from "@/components/HowItWorks";
 import { Intro } from "@/components/Intro";
 import { IntroName } from "@/components/IntroName";
-import { Plate } from "@/components/Plate";
-import { StepObserver } from "@/components/StepObserver";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -78,52 +77,21 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {d.hero.audience}
             </p>
             <div className="hero-ctas rise" style={{ "--d": 2 } as React.CSSProperties}>
-              <BookLink href={book} location="hero" className="pill">
+              <BookLink href={book} className="pill">
                 {d.hero.primary}
               </BookLink>
-              <Link href={`/${lang}#contact`} className="text-link" data-cta="hero-secondary">
+              <Link href={`/${lang}#contact`} className="text-link">
                 {d.hero.secondary} <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
           <div className="hero-visual rise" style={{ "--d": 3 } as React.CSSProperties}>
             <HeroVisual v={d.hero.visual} />
+            <p className="hero-caption">{d.hero.visual.caption}</p>
           </div>
         </section>
 
-        <section className="section wrap" id="how" data-active="0" aria-labelledby="how-title">
-          <h2 className="display h2 center" id="how-title">
-            {d.how.heading}
-          </h2>
-          <div className="how">
-            <div className="how-plates" aria-hidden="true">
-              {d.how.steps.map((_, i) => (
-                <Plate key={i} n={i + 1} />
-              ))}
-            </div>
-            <ol className="how-steps">
-              {d.how.steps.map((s, i) => (
-                <li key={s.title} className="how-step" data-step={i}>
-                  <Plate n={i + 1} className="plate plate-sm" />
-                  <div>
-                    <h3>{s.title}</h3>
-                    <p>{s.text}</p>
-                    {s.points && (
-                      <ul className="points">
-                        {s.points.map((p) => (
-                          <li key={p.lead}>
-                            <b>{p.lead}</b> {p.text}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <StepObserver />
-        </section>
+        <HowItWorks d={d.how} />
 
         <section className="section wrap" id="examples" aria-labelledby="examples-title">
           <div className="section-head">
@@ -158,12 +126,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </h2>
           <p className="lead">{d.closing.sub}</p>
           <div className="closing-ctas">
-            <BookLink href={config.bookingUrl ?? "#contact-form"} location="closing" className="pill">
+            <BookLink href={config.bookingUrl ?? "#contact-form"} className="pill">
               {d.hero.primary}
             </BookLink>
             <p className="closing-email">
               {d.closing.email}{" "}
-              <a href={`mailto:${config.contactEmail}`} data-cta="closing-email">
+              <a href={`mailto:${config.contactEmail}`}>
                 {config.contactEmail}
               </a>
             </p>

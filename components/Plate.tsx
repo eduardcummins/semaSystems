@@ -4,9 +4,9 @@ const at = (u: number, v: number) => [160 + 150 * u - 150 * v, 10 + 65 * u + 65 
 const GRID = [1, 2, 3, 4, 5, 6, 7].map((k) => k / 8);
 const T = 9; // edge thickness
 
-export function Plate({ n, className = "plate" }: { n: number; className?: string }) {
+export function Plate({ n }: { n: number }) {
   return (
-    <svg className={className} viewBox="0 0 320 160" aria-hidden="true">
+    <svg className="plate" viewBox="0 0 320 160" aria-hidden="true">
       <path className="plate-side" d={`M10 75 L160 140 L160 ${140 + T} L10 ${75 + T}Z`} />
       <path className="plate-side plate-side-r" d={`M160 140 L310 75 L310 ${75 + T} L160 ${140 + T}Z`} />
       <path className="plate-top" d="M160 10 L310 75 L160 140 L10 75Z" />
