@@ -57,6 +57,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section className="hero wrap" id="top">
           <div className="hero-glow" aria-hidden="true" />
           <div className="hero-copy">
+            <p className="hero-brand rise" style={{ "--d": -4 } as React.CSSProperties}>
+              Sema Systems
+            </p>
             <div className="hero-title">
               <IntroName />
               <h1 className="display">
