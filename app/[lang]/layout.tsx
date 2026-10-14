@@ -41,7 +41,11 @@ const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", display: "sw
 // data-js tells the CSS that scripts run (some sections fall back to a plain layout without them).
 // The home-page intro plays once per session, only on a fresh visit to /en or /es, never under reduced motion.
 // It only hides content with opacity, so the page is complete in the HTML and nothing shifts (see Intro.tsx).
-const introScript = `document.documentElement.setAttribute("data-js","");try{if(/^\\/(en|es)\\/?$/.test(location.pathname)&&!location.hash&&!sessionStorage.getItem("sema-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){sessionStorage.setItem("sema-intro","1");document.documentElement.setAttribute("data-intro","")}}catch(e){}`;
+const introScript = `document.documentElement.setAttribute("data-js","");try{if(/^\\/(en|es)\\/?$/.test(location.pathname)&&!location.hash&&!sessionStorage.getItem("sema-intro")&&!sessionStorage.getItem("sema-restore")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){sessionStorage.setItem("sema-intro","1");document.documentElement.setAttribute("data-intro","")}}catch(e){}`;
+
+// After switching language, return to the same point on the page (saved by LangSwitch). Runs at the end of
+// <body>, once the content is parsed, so the page opens in place instead of jumping after it appears.
+const restoreScript = `try{var r=JSON.parse(sessionStorage.getItem("sema-restore")||"null");if(r){sessionStorage.removeItem("sema-restore");var el=r.id&&document.getElementById(r.id);var y=el?el.getBoundingClientRect().top+scrollY+r.ratio*el.offsetHeight-80:r.ratio*document.documentElement.scrollHeight;scrollTo({top:Math.max(0,y),behavior:"instant"})}}catch(e){}`;
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -53,6 +57,7 @@ export default async function RootLayout({ children, params }: { children: React
       </head>
       <body suppressHydrationWarning>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: restoreScript }} />
       </body>
     </html>
   );
