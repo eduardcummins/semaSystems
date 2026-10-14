@@ -1,48 +1,46 @@
-import type { WfId } from "@/lib/workflows";
+import type { ExampleId } from "@/lib/examples";
 
-export type NodeCopy = { title: string; tool: string; result: string; input: string; output: string };
-export type WfCopy = {
+export type ExampleCopy = {
   tab: string;
-  title: string;
-  sample: string;
+  problem: string;
+  steps: string[]; // 3-5 short sentences, in order; lib/examples.ts marks which one a person does
   before: string;
   after: string;
-  nodes: Record<string, NodeCopy>;
 };
 
 export type Dict = {
   meta: { title: string; description: string; ogLocale: string };
-  nav: { how: string; examples: string; faq: string; book: string; menu: string; close: string; home: string };
-  hero: { title: string; sub: string; primary: string; secondary: string };
-  player: {
-    label: string;
-    sample: string;
+  nav: { label: string; how: string; examples: string; faq: string; book: string; menu: string; close: string; home: string; language: string };
+  hero: {
+    title: string;
+    sub: string;
+    audience: string;
+    primary: string;
+    secondary: string;
+    visual: { label: string; agent: string; status: string; steps: string[]; log: string };
+  };
+  how: {
+    heading: string;
+    steps: { title: string; text: string; points?: { lead: string; text: string }[] }[];
+  };
+  examples: {
+    heading: string;
+    sub: string;
+    illustrative: string;
+    tabsLabel: string;
+    problem: string;
+    does: string;
+    check: string;
     before: string;
     after: string;
     tools: string;
-    illustrative: string;
-    play: string;
-    pause: string;
-    next: string;
-    restart: string;
-    stepNow: string; // "Step {n} of {total}: {title}"
-    input: string;
-    output: string;
-    pending: string;
-    person: string;
-    hint: string;
-    items: Record<WfId, WfCopy>;
+    items: Record<ExampleId, ExampleCopy>;
   };
-  outcomes: { title: string; text: string }[];
-  how: { heading: string; steps: { title: string; text: string }[] };
-  examples: { heading: string; intro: string };
-  safe: { heading: string; items: { title: string; text: string }[] };
-  engagement: { heading: string; fixed: string; priced: string }; // priced uses {pilot} and {retainer}
-  cta: { line: string };
-  faq: { heading: string; items: { q: string; a: string }[] };
+  // An answer of null hides the question until it is written (see the TODO next to it).
+  faq: { heading: string; items: { q: string; a: string | null }[] };
+  closing: { title: string; sub: string; email: string };
   contact: {
     heading: string;
-    intro: string;
     email: string;
     task: string;
     optional: string;
@@ -50,12 +48,10 @@ export type Dict = {
     sending: string;
     success: string;
     error: string;
-    bookFirst: string;
-    orSend: string;
     consentBefore: string;
     consentLink: string;
     consentAfter: string;
   };
-  footer: { themeLight: string; themeDark: string; tagline: string; privacy: string; legal: string; linkedin: string; legalLine: string };
-  placeholder: { privacyTitle: string; legalTitle: string; text: string; back: string };
+  footer: { label: string; privacy: string; legalLine: string; rights: string };
+  placeholder: { privacyTitle: string; text: string; back: string };
 };
