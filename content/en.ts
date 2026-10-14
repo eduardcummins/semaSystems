@@ -3,7 +3,7 @@ import type { Dict } from "./types";
 // Plain, short UK English. No hype, no jargon, no pricing.
 export const en: Dict = {
   meta: {
-    title: "Sema Systems: agents you can watch work",
+    title: "Sema Systems: bespoke, interactive AI agents",
     description:
       "Bespoke AI agents for accountancy firms, insurers and small teams. Built in our own software and delivered as a workflow your team can read and run.",
     ogLocale: "en_GB",
@@ -20,7 +20,7 @@ export const en: Dict = {
     language: "Español",
   },
   hero: {
-    title: "Agents you can watch work.",
+    title: "Building bespoke, interactive AI agents.",
     sub: "Tell us about a task the way you'd explain it to a colleague. We build an AI agent that does it inside the tools you already use, and hand it over as a visual workflow, so your team can see every step and stay in control.",
     audience: "For accountancy firms, insurers and small teams.",
     visual: {
@@ -161,8 +161,8 @@ export const en: Dict = {
     ],
   },
   closing: {
-    title: "Send us one task that eats your week.",
-    sub: "We'll show you how an agent would do it.",
+    title: "Get in touch.",
+    sub: "Tell us a little about your work and we'll set up a free call to talk through next steps.",
     email: "Or email",
   },
   contact: {

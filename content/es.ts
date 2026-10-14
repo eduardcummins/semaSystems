@@ -3,7 +3,7 @@ import type { Dict } from "./types";
 // Spanish (Spain), formal "usted". Mirrors en.ts key for key; written to read naturally, not translated word for word.
 export const es: Dict = {
   meta: {
-    title: "Sema Systems: agentes que puede ver trabajar",
+    title: "Sema Systems: agentes de IA a medida e interactivos",
     description:
       "Agentes de IA a medida para asesorías, aseguradoras y equipos pequeños. Creados con nuestro propio software y entregados como un flujo que su equipo puede leer y gestionar.",
     ogLocale: "es_ES",
@@ -20,7 +20,7 @@ export const es: Dict = {
     language: "English",
   },
   hero: {
-    title: "Agentes que puede ver trabajar.",
+    title: "Creamos agentes de IA interactivos y a medida.",
     sub: "Cuéntenos una tarea como se la explicaría a un compañero. Creamos un agente de IA que la hace dentro de las herramientas que ya utiliza y se lo entregamos como un flujo visual, para que su equipo vea cada paso y mantenga el control.",
     audience: "Para asesorías, aseguradoras y equipos pequeños.",
     visual: {
@@ -161,8 +161,8 @@ export const es: Dict = {
     ],
   },
   closing: {
-    title: "Envíenos una tarea que le robe la semana.",
-    sub: "Le mostraremos cómo la haría un agente.",
+    title: "Hablemos.",
+    sub: "Cuéntenos un poco sobre su trabajo y concertaremos una llamada gratuita para ver los siguientes pasos.",
     email: "O escríbanos a",
   },
   contact: {

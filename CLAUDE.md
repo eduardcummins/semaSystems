@@ -10,8 +10,8 @@ Decisions that must not be forgotten or reversed. The site is a single home page
 - Contact email: eduardcummins@gmail.com (lib/config.ts, overridable with CONTACT_EMAIL).
 
 ## Page
-- Order: Hero → How it works → Example workflows → FAQ → Closing CTA with the contact form → Footer.
-- Hero headline: "Agents you can watch work." The hero visual is the "Invoice intake" agent shown as a workflow.
+- Order: Hero → How it works → Example workflows → FAQ → "Get in touch" with the contact form → Footer.
+- Hero headline: "Building bespoke, interactive AI agents." The hero visual is the "Invoice intake" agent shown as a workflow.
 - How it works is pinned while you scroll through it; each step adds an isometric plate and swaps in its text.
 - Examples: six illustrative workflows. The step a person does is dashed, in the accent colour, labelled "You check this".
 - The design is original. Do not copy text, assets or recognisable details from other companies' sites.
