@@ -4,10 +4,10 @@ import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
 import { Analytics } from "@/components/Analytics";
 import { isLocale, locales } from "@/lib/i18n";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import "../globals.css";
 
-export const viewport: Viewport = { themeColor: "#f6f4ef" };
+export const viewport: Viewport = { themeColor: "#050505", colorScheme: "dark" };
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -35,20 +35,21 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 }
 
-// Self-hosted at build time by next/font, with automatic size-adjusted fallbacks to avoid layout shift.
-const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
-const mono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains", weight: ["400", "600"], preload: false });
+// Self-hosted at build time by next/font, with size-adjusted fallbacks so the swap causes no layout shift.
+const sans = Inter({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-serif" });
 
-// Applies a saved light/dark choice before first paint; with no choice the CSS follows the system setting.
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+// The home-page intro plays once per session, only on a fresh visit to /en or /es, never under reduced motion.
+// It only hides content with opacity, so the page is complete in the HTML and nothing shifts (see Intro.tsx).
+const introScript = `try{if(/^\\/(en|es)\\/?$/.test(location.pathname)&&!location.hash&&!sessionStorage.getItem("sema-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){sessionStorage.setItem("sema-intro","1");document.documentElement.setAttribute("data-intro","")}}catch(e){}`;
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
       </head>
       <body suppressHydrationWarning>
         {children}
