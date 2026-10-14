@@ -1,19 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import type { Dict } from "@/content";
 import { track } from "@/lib/analytics";
 
-export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
-  const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
+type State = "idle" | "sending" | "success" | "error";
+const noop = () => () => {};
 
+export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
   // Submissions made without JavaScript come back here as ?sent=1 / ?error=1 (see /api/contact).
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
-    if (q.has("sent")) setState("success");
-    else if (q.has("error")) setState("error");
-  }, []);
+  const query = useSyncExternalStore(noop, () => window.location.search, () => "");
+  const [submitted, setState] = useState<State | null>(null);
+  const state: State = submitted ?? (/[?&]sent=/.test(query) ? "success" : /[?&]error=/.test(query) ? "error" : "idle");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,7 +54,7 @@ export function ContactForm({ d, lang }: { d: Dict["contact"]; lang: string }) {
         {d.consentAfter}
       </p>
       <div className="form-foot">
-        <button className="btn" disabled={state === "sending"}>
+        <button className="pill" disabled={state === "sending"}>
           {state === "sending" ? d.sending : d.send}
         </button>
         <p role="status" className={state === "error" ? "err" : "ok"}>
