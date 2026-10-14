@@ -4,12 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Dict } from "@/content";
 import type { Locale } from "@/lib/i18n";
-import { BookLink } from "./BookLink";
 import { LangSwitch } from "./LangSwitch";
 import { Logo } from "./Logo";
 
 /** Full width and flat at the top; after 40px of scroll it becomes a floating rounded bar. */
-export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; book: string }) {
+export function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }) {
   const [floating, setFloating] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -48,9 +47,9 @@ export function Header({ lang, nav, book }: { lang: Locale; nav: Dict["nav"]; bo
         </nav>
         <div className="bar-end">
           <LangSwitch lang={lang} name={nav.language} />
-          <BookLink href={book} className="pill pill-sm">
-            {nav.book}
-          </BookLink>
+          <Link href={`/${lang}#contact`} className="pill pill-sm">
+            {nav.contact}
+          </Link>
           <button type="button" className="menu-btn" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
             <span className="sr-only">{open ? nav.close : nav.menu}</span>
             <span className="menu-icon" data-open={open ? "" : undefined} aria-hidden="true" />

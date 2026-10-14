@@ -13,7 +13,7 @@ export const en: Dict = {
     how: "How it works",
     examples: "Examples",
     faq: "FAQ",
-    book: "Book a free call",
+    contact: "Contact",
     menu: "Menu",
     close: "Close menu",
     home: "Sema Systems home",
@@ -23,8 +23,6 @@ export const en: Dict = {
     title: "Agents you can watch work.",
     sub: "Tell us about a task the way you'd explain it to a colleague. We build an AI agent that does it inside the tools you already use, and hand it over as a visual workflow, so your team can see every step and stay in control.",
     audience: "For accountancy firms, insurers and small teams.",
-    primary: "Book a free call",
-    secondary: "Send us a task",
     visual: {
       label: "Example: an agent called Invoice intake, shown as four steps. The last step waits for you to approve.",
       agent: "Invoice intake",
@@ -168,7 +166,6 @@ export const en: Dict = {
     email: "Or email",
   },
   contact: {
-    heading: "Send us a task",
     email: "Your email",
     task: "What task eats your time?",
     optional: "optional",

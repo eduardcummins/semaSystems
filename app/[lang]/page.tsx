@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
-import { bookHref, config } from "@/lib/config";
+import { config } from "@/lib/config";
 import { isLocale } from "@/lib/i18n";
-import { BookLink } from "@/components/BookLink";
 import { ContactForm } from "@/components/ContactForm";
 import { Examples } from "@/components/Examples";
 import { Footer } from "@/components/Footer";
@@ -17,7 +16,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const d = dictionaries[lang];
-  const book = bookHref(lang);
   const faq = d.faq.items.filter((f): f is { q: string; a: string } => f.a !== null);
 
   const jsonLd = [
@@ -52,7 +50,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Intro />
-      <Header lang={lang} nav={d.nav} book={book} />
+      <Header lang={lang} nav={d.nav} />
       <main>
         <section className="hero wrap" id="top">
           <div className="hero-glow" aria-hidden="true" />
@@ -80,11 +78,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {d.hero.audience}
             </p>
             <div className="hero-ctas rise" style={{ "--d": 2 } as React.CSSProperties}>
-              <BookLink href={book} className="pill">
-                {d.hero.primary}
-              </BookLink>
-              <Link href={`/${lang}#contact`} className="text-link">
-                {d.hero.secondary} <span aria-hidden="true">→</span>
+              <Link href={`/${lang}#contact`} className="pill">
+                {d.nav.contact}
               </Link>
             </div>
           </div>
@@ -128,21 +123,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {d.closing.title}
           </h2>
           <p className="lead">{d.closing.sub}</p>
-          <div className="closing-ctas">
-            <BookLink href={config.bookingUrl ?? "#contact-form"} className="pill">
-              {d.hero.primary}
-            </BookLink>
-            <p className="closing-email">
-              {d.closing.email}{" "}
-              <a href={`mailto:${config.contactEmail}`}>
-                {config.contactEmail}
-              </a>
-            </p>
-          </div>
           <div className="contact" id="contact-form">
-            <h3>{d.contact.heading}</h3>
             <ContactForm d={d.contact} lang={lang} />
           </div>
+          <p className="closing-email">
+            {d.closing.email}{" "}
+            <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
+          </p>
         </section>
       </main>
       <Footer lang={lang} d={d.footer} nav={d.nav} />

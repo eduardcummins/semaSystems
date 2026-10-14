@@ -10,13 +10,11 @@ export type ExampleCopy = {
 
 export type Dict = {
   meta: { title: string; description: string; ogLocale: string };
-  nav: { label: string; how: string; examples: string; faq: string; book: string; menu: string; close: string; home: string; language: string };
+  nav: { label: string; how: string; examples: string; faq: string; contact: string; menu: string; close: string; home: string; language: string };
   hero: {
     title: string;
     sub: string;
     audience: string;
-    primary: string;
-    secondary: string;
     visual: { label: string; agent: string; view: string; status: string; steps: string[]; log: string; caption: string };
   };
   how: {
@@ -39,7 +37,6 @@ export type Dict = {
   faq: { heading: string; items: { q: string; a: string | null }[] };
   closing: { title: string; sub: string; email: string };
   contact: {
-    heading: string;
     email: string;
     task: string;
     optional: string;

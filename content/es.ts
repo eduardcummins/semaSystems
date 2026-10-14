@@ -13,7 +13,7 @@ export const es: Dict = {
     how: "Cómo funciona",
     examples: "Ejemplos",
     faq: "Preguntas",
-    book: "Reserve una llamada",
+    contact: "Contacto",
     menu: "Menú",
     close: "Cerrar menú",
     home: "Inicio de Sema Systems",
@@ -23,8 +23,6 @@ export const es: Dict = {
     title: "Agentes que puede ver trabajar.",
     sub: "Cuéntenos una tarea como se la explicaría a un compañero. Creamos un agente de IA que la hace dentro de las herramientas que ya utiliza y se lo entregamos como un flujo visual, para que su equipo vea cada paso y mantenga el control.",
     audience: "Para asesorías, aseguradoras y equipos pequeños.",
-    primary: "Reserve una llamada gratuita",
-    secondary: "Envíenos una tarea",
     visual: {
       label: "Ejemplo: un agente llamado Registro de facturas, en cuatro pasos. El último espera a que usted lo apruebe.",
       agent: "Registro de facturas",
@@ -168,7 +166,6 @@ export const es: Dict = {
     email: "O escríbanos a",
   },
   contact: {
-    heading: "Envíenos una tarea",
     email: "Su correo electrónico",
     task: "¿Qué tarea le quita más tiempo?",
     optional: "opcional",

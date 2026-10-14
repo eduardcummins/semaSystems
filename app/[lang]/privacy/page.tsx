@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { isLocale } from "@/lib/i18n";
-import { bookHref } from "@/lib/config";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
@@ -21,7 +20,7 @@ export default async function Privacy({ params }: { params: Promise<{ lang: stri
   const d = dictionaries[lang];
   return (
     <>
-      <Header lang={lang} nav={d.nav} book={bookHref(lang)} />
+      <Header lang={lang} nav={d.nav} />
       <main className="wrap narrow page">
         <h1 className="display h2">{d.placeholder.privacyTitle}</h1>
         <p className="lead">{d.placeholder.text}</p>

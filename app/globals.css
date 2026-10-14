@@ -1195,16 +1195,8 @@ h1.display {
   margin: 0 auto;
 }
 
-.closing-ctas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  margin-top: 36px;
-}
-
 .closing-email {
-  margin: 0;
+  margin: 32px 0 0;
   font-size: 15px;
   color: var(--faint);
   overflow-wrap: anywhere;
@@ -1218,15 +1210,8 @@ h1.display {
 
 .contact {
   max-width: 520px;
-  margin: 56px auto 0;
-  padding-top: 40px;
-  border-top: 1px solid var(--line);
+  margin: 44px auto 0;
   text-align: left;
-}
-
-.contact h3 {
-  margin-bottom: 22px;
-  font: 500 19px/1.3 var(--sans);
 }
 
 .form {
