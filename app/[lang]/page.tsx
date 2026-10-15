@@ -15,7 +15,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const d = dictionaries[lang];
-  const faq = d.faq.items.filter((f): f is { q: string; a: string } => f.a !== null);
 
   const jsonLd = [
     {
@@ -41,7 +40,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       "@context": "https://schema.org",
       "@type": "FAQPage",
       inLanguage: lang,
-      mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+      mainEntity: d.faq.items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
     },
   ];
 
@@ -108,7 +107,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {d.faq.heading}
           </h2>
           <div className="faq">
-            {faq.map((f) => (
+            {d.faq.items.map((f) => (
               <details key={f.q} name="faq">
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>

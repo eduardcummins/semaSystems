@@ -13,7 +13,8 @@ npm run lint
 ## Settings
 Copy `.env.example` to `.env.local` and fill in what you need. Every setting is optional:
 - `RESEND_API_KEY` (and `CONTACT_FROM_EMAIL`): sends contact-form messages by email. Without it, they are only printed in the server log.
-- `CONTACT_EMAIL`: where messages go and the address shown on the site (default eduardcummins@gmail.com).
+- `CONTACT_EMAIL`: the address shown on the site (default eduardcummins@gmail.com).
+- `CONTACT_FORM_TO`: the inbox that receives contact-form messages (default eduardcummins@gmail.com).
 - `SITE_URL`: public address, used for canonical links, the sitemap and the share image (defaults to the Vercel production domain).
 
 ## Where things are

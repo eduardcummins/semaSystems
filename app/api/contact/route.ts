@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: process.env.CONTACT_FROM_EMAIL ?? "Sema Systems <onboarding@resend.dev>",
-      to: config.contactEmail,
+      to: config.formTo,
       reply_to: email,
       subject: `Task to map from ${email}`,
       text: `Email: ${email}

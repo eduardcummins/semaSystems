@@ -7,7 +7,8 @@ Decisions that must not be forgotten or reversed. The site is a single home page
 - Sema Systems builds bespoke AI agents for businesses, mainly small teams, accountancy firms and insurers. Each agent is built in our own software (not n8n, Zapier or similar) and handed over as a visual workflow the client's team can read and run. Make that visual workflow obvious wherever it fits.
 - Tone: plain, short UK English, confident, no hype. No jargon, library or model names on marketing pages. Do not claim a team size, clients, testimonials or logos we do not have.
 - No pricing anywhere on the site.
-- Contact email: eduardcummins@gmail.com (lib/config.ts, overridable with CONTACT_EMAIL).
+- Contact email shown on the site: eduardcummins@gmail.com until hello@semasys.xyz forwarding is set up (lib/config.ts, CONTACT_EMAIL). Form messages go to eduardcummins@gmail.com (CONTACT_FORM_TO).
+- Live at https://www.semasys.xyz (Vercel, free Hobby plan for now).
 
 ## Page
 - Order: Hero → How it works → Example workflows → FAQ → "Get in touch" with the contact form → Footer.
@@ -30,6 +31,7 @@ Decisions that must not be forgotten or reversed. The site is a single home page
 
 ## Build and hosting
 - Next.js (App Router, TypeScript). Run locally for now (see README.md). Do not push, open PRs or deploy unless Ed asks.
+- The privacy policy (content/en.ts and es.ts, `privacy`) was written in-house and needs a legal read.
 - The contact form posts to app/api/contact/route.ts, which emails the request via Resend when RESEND_API_KEY is set. Keys go in .env.local, never committed.
 - `npm run build` and `npm run lint` must pass.
 - Page views are counted with Vercel Web Analytics (@vercel/analytics, cookie-free). The /_vercel path is excluded from the language redirect in proxy.ts so it keeps working.

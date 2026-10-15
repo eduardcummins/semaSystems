@@ -144,7 +144,7 @@ export const es: Dict = {
       },
       {
         q: "¿Cuánto se tarda en tener el primer flujo?",
-        a: null, // TODO(Ed): confirmar un plazo habitual y sustituir null por la respuesta.
+        a: "Depende del flujo. Le indicamos los plazos en el presupuesto por escrito, antes de empezar ningún trabajo.",
       },
       {
         q: "¿Cuánto cuesta?",
@@ -184,9 +184,69 @@ export const es: Dict = {
       "Sema Systems es el nombre comercial de Innovation Partners Ltd. Sociedad registrada en Inglaterra y Gales con el número 04369538. Domicilio social: 3 Athenaeum Road, Londres, N20 9AA.",
     rights: "Sema Systems",
   },
-  placeholder: {
-    privacyTitle: "Política de privacidad",
-    text: "Esta página es provisional y se redactará por separado.",
+  // LEGAL: redactada internamente para una pequeña empresa del Reino Unido. Debe revisarla un asesor legal antes de darla por buena.
+  privacy: {
+    title: "Política de privacidad",
+    updated: "Última actualización: 15 de octubre de 2026",
     back: "Volver al inicio",
+    sections: [
+      {
+        heading: "Quiénes somos",
+        body: [
+          "Sema Systems es el nombre comercial de Innovation Partners Ltd, sociedad registrada en Inglaterra y Gales con el número 04369538 y domicilio social en 3 Athenaeum Road, Londres, N20 9AA. Somos responsables de los datos personales que se describen aquí. Puede escribirnos sobre ellos a {email}.",
+        ],
+      },
+      {
+        heading: "Qué datos recogemos",
+        body: [
+          [
+            "Si usa el formulario de contacto: su dirección de correo y lo que escriba en el mensaje.",
+            "Si nos escribe por correo: su dirección, su nombre y el contenido de su mensaje.",
+            "Si visita la web: recuentos anónimos de visitas, como las páginas vistas, la web de la que llega, su país y el tipo de dispositivo y navegador. Se recogen sin cookies y no permiten identificarle.",
+          ],
+        ],
+      },
+      {
+        heading: "Para qué los usamos",
+        body: [
+          "Usamos sus datos únicamente para responder a su consulta y, si nos lo pide, concertar una llamada y prepararle un presupuesto. La base legal es nuestro interés legítimo en responder a quien se pone en contacto con nosotros. Si llegamos a trabajar juntos, la base es el contrato entre ambas partes.",
+          "Usamos los recuentos anónimos de visitas para entender cómo se utiliza la web. No vendemos sus datos, no los usamos para publicidad y no le añadimos a ninguna lista de correo.",
+        ],
+      },
+      {
+        heading: "Cookies",
+        body: [
+          "No usamos cookies de seguimiento ni de publicidad. Si cambia de idioma, guardamos su elección en una pequeña cookie para que la web se abra en ese idioma la próxima vez. Su navegador también guarda una nota temporal, que se borra al cerrarlo, para que la animación de inicio solo se muestre una vez.",
+        ],
+      },
+      {
+        heading: "Quién los trata por nosotros",
+        body: [
+          [
+            "Vercel aloja la web y proporciona los recuentos anónimos de visitas.",
+            "Resend entrega en nuestro buzón los mensajes del formulario de contacto.",
+            "Google aloja nuestro correo electrónico.",
+          ],
+          "Estos proveedores actúan siguiendo nuestras instrucciones, conforme a sus condiciones de tratamiento de datos. Algunos tratan datos en Estados Unidos; en ese caso, nos acogemos a las garantías para transferencias desde el Reino Unido que recogen dichas condiciones.",
+        ],
+      },
+      {
+        heading: "Cuánto tiempo los conservamos",
+        body: [
+          "Conservamos las consultas hasta 12 meses después de nuestro último contacto. Si empezamos a trabajar juntos, conservamos lo necesario mientras dure el contrato y, después, durante el tiempo que exija la ley, por ejemplo para la contabilidad.",
+        ],
+      },
+      {
+        heading: "Sus derechos",
+        body: [
+          "Puede pedirnos una copia de sus datos, solicitar que los corrijamos o eliminemos, oponerse a su uso o limitarlo, y pedir que se los entreguemos a usted o a otra persona. Escríbanos a {email} y le responderemos en el plazo de un mes.",
+          "Si no está conforme con cómo hemos tratado sus datos, puede presentar una reclamación ante la Information Commissioner's Office del Reino Unido (ico.org.uk) o, si reside en la UE, ante la autoridad de protección de datos de su país, como la Agencia Española de Protección de Datos (aepd.es).",
+        ],
+      },
+      {
+        heading: "Cambios",
+        body: ["Si modificamos esta política, actualizaremos esta página y la fecha que figura al principio."],
+      },
+    ],
   },
 };

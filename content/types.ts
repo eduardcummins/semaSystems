@@ -33,8 +33,7 @@ export type Dict = {
     after: string;
     items: Record<ExampleId, ExampleCopy>;
   };
-  // An answer of null hides the question until it is written (see the TODO next to it).
-  faq: { heading: string; items: { q: string; a: string | null }[] };
+  faq: { heading: string; items: { q: string; a: string }[] };
   closing: { title: string; sub: string; email: string };
   contact: {
     email: string;
@@ -49,5 +48,6 @@ export type Dict = {
     consentAfter: string;
   };
   footer: { label: string; privacy: string; legalLine: string; rights: string };
-  placeholder: { privacyTitle: string; text: string; back: string };
+  // Each body item is a paragraph, or a bulleted list when it is an array. "{email}" becomes the contact address.
+  privacy: { title: string; updated: string; back: string; sections: { heading: string; body: (string | string[])[] }[] };
 };

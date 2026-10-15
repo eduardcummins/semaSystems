@@ -144,7 +144,7 @@ export const en: Dict = {
       },
       {
         q: "How long does a first workflow take?",
-        a: null, // TODO(Ed): confirm a typical timeframe, then replace null with the answer.
+        a: "It depends on the workflow. We give you a timeline in the written quote, before any work starts.",
       },
       {
         q: "How much does it cost?",
@@ -184,9 +184,69 @@ export const en: Dict = {
       "Sema Systems is a trading name of Innovation Partners Ltd. Registered in England & Wales, company no. 04369538. Registered office: 3 Athenaeum Road, London, N20 9AA.",
     rights: "Sema Systems",
   },
-  placeholder: {
-    privacyTitle: "Privacy policy",
-    text: "This page is a placeholder and will be written separately.",
+  // LEGAL: written in-house for a small UK company. Have it checked by a legal adviser before relying on it.
+  privacy: {
+    title: "Privacy policy",
+    updated: "Last updated: 15 October 2026",
     back: "Back to home",
+    sections: [
+      {
+        heading: "Who we are",
+        body: [
+          "Sema Systems is a trading name of Innovation Partners Ltd, registered in England & Wales (company no. 04369538), registered office 3 Athenaeum Road, London, N20 9AA. We are responsible for the personal data described here. You can contact us about it at {email}.",
+        ],
+      },
+      {
+        heading: "What we collect",
+        body: [
+          [
+            "When you use the contact form: your email address and anything you write in the message box.",
+            "When you email us: your email address, your name and whatever your message contains.",
+            "When you visit the site: anonymous visit counts, such as which pages are viewed, the site you came from, your country and your type of device and browser. These are collected without cookies and can't be used to identify you.",
+          ],
+        ],
+      },
+      {
+        heading: "How we use it",
+        body: [
+          "We use your details only to reply to your enquiry and, if you ask us to, to arrange a call and prepare a quote. Our lawful basis is our legitimate interest in responding to people who contact us. If we go on to work together, we rely on the contract between us.",
+          "We use the anonymous visit counts to understand how the site is used. We don't sell your data, use it for advertising or add you to a mailing list.",
+        ],
+      },
+      {
+        heading: "Cookies",
+        body: [
+          "We don't use cookies for tracking or advertising. If you switch language, we store your choice in a small cookie so the site opens in that language next time. Your browser also keeps a temporary note, cleared when you close it, so the opening animation only plays once.",
+        ],
+      },
+      {
+        heading: "Who handles it for us",
+        body: [
+          [
+            "Vercel hosts the website and provides the anonymous visit counts.",
+            "Resend delivers contact-form messages to our inbox.",
+            "Google hosts our email.",
+          ],
+          "These providers act on our instructions under data processing terms. Some of them process data in the United States. Where they do, we rely on the safeguards for transfers from the UK set out in those terms.",
+        ],
+      },
+      {
+        heading: "How long we keep it",
+        body: [
+          "We keep enquiries for up to 12 months after our last contact with you. If we start working together, we keep what we need for the length of our contract and afterwards for as long as the law requires, for example for accounting records.",
+        ],
+      },
+      {
+        heading: "Your rights",
+        body: [
+          "You can ask for a copy of your data, ask us to correct or delete it, object to or restrict how we use it, and ask for it to be transferred to you or someone else. Email {email} and we'll reply within one month.",
+          "If you're unhappy with how we've handled your data, you can complain to the Information Commissioner's Office (ico.org.uk) or, if you live in the EU, to your local data protection authority.",
+        ],
+      },
+      {
+        heading: "Changes",
+        body: ["If we change this policy, we'll update this page and the date at the top."],
+      },
+    ],
   },
 };
