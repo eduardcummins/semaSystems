@@ -32,4 +32,5 @@ Decisions that must not be forgotten or reversed. The site is a single home page
 - Next.js (App Router, TypeScript). Run locally for now (see README.md). Do not push, open PRs or deploy unless Ed asks.
 - The contact form posts to app/api/contact/route.ts, which emails the request via Resend when RESEND_API_KEY is set. Keys go in .env.local, never committed.
 - `npm run build` and `npm run lint` must pass.
-- Ask before adding dependencies beyond Next.js, React and an email service.
+- Page views are counted with Vercel Web Analytics (@vercel/analytics, cookie-free). The /_vercel path is excluded from the language redirect in proxy.ts so it keeps working.
+- Ask before adding dependencies beyond Next.js, React, Vercel Analytics and an email service.

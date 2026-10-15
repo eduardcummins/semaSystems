@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
 import { isLocale, locales } from "@/lib/i18n";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "../globals.css";
 
@@ -58,6 +59,8 @@ export default async function RootLayout({ children, params }: { children: React
       <body suppressHydrationWarning>
         {children}
         <script dangerouslySetInnerHTML={{ __html: restoreScript }} />
+        {/* Vercel Web Analytics: cookie-free page-view counts, only active on the deployed site. */}
+        <Analytics />
       </body>
     </html>
   );
