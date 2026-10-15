@@ -22,24 +22,26 @@ export async function POST(req: Request) {
 
   const key = process.env.RESEND_API_KEY;
   if (!key) {
-    // No email service configured yet: log so nothing is lost while developing locally.
-    console.log("[contact] RESEND_API_KEY not set, logging instead:", { email, task });
-    return respond(true);
+    // No email service configured. Locally, log the message so testing works. On the live site, report a failure
+    // so the visitor is told to email instead of being thanked for a message nobody receives.
+    console.log("[contact] RESEND_API_KEY not set:", { email, task });
+    return process.env.VERCEL ? respond(false, 503) : respond(true);
   }
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: process.env.CONTACT_FROM_EMAIL ?? "Sema Systems <onboarding@resend.dev>",
+      from: process.env.CONTACT_FROM_EMAIL ?? "Sema Systems <website@semasys.xyz>",
       to: config.formTo,
       reply_to: email,
-      subject: `Task to map from ${email}`,
+      subject: `Website enquiry from ${email}`,
       text: `Email: ${email}
 
 What task eats their time:
 ${task || "(not given)"}`,
     }),
   });
+  if (!res.ok) console.error("[contact] Resend refused the message:", res.status, await res.text());
   return respond(res.ok, res.ok ? 200 : 502);
 }

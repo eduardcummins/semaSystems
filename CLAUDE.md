@@ -7,7 +7,7 @@ Decisions that must not be forgotten or reversed. The site is a single home page
 - Sema Systems builds bespoke AI agents for businesses, mainly small teams, accountancy firms and insurers. Each agent is built in our own software (not n8n, Zapier or similar) and handed over as a visual workflow the client's team can read and run. Make that visual workflow obvious wherever it fits.
 - Tone: plain, short UK English, confident, no hype. No jargon, library or model names on marketing pages. Do not claim a team size, clients, testimonials or logos we do not have.
 - No pricing anywhere on the site.
-- Contact email shown on the site: eduardcummins@gmail.com until hello@semasys.xyz forwarding is set up (lib/config.ts, CONTACT_EMAIL). Form messages go to eduardcummins@gmail.com (CONTACT_FORM_TO).
+- Contact email: hello@semasys.xyz, forwarded to eduardcummins@gmail.com by ImprovMX (DNS in Vercel). The form sends from website@semasys.xyz to hello@semasys.xyz via Resend (lib/config.ts: CONTACT_EMAIL, CONTACT_FORM_TO).
 - Live at https://www.semasys.xyz (Vercel, free Hobby plan for now).
 
 ## Page
