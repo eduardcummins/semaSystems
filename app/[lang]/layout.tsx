@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     metadataBase: new URL(config.siteUrl),
     title: d.title,
     description: d.description,
-    alternates: { canonical: `/${lang}`, languages: { en: "/en", es: "/es", "x-default": "/en" } },
+    // x-default is the bare address, which sends each visitor to their language (proxy.ts). Google's guidance for
+    // language redirects; it stops "/" being treated as a duplicate of /en.
+    alternates: { canonical: `/${lang}`, languages: { en: "/en", es: "/es", "x-default": "/" } },
     openGraph: {
       type: "website",
       siteName: "Sema Systems",

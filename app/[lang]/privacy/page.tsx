@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   if (!isLocale(lang)) return {};
   return {
     title: `${dictionaries[lang].privacy.title} | Sema Systems`,
-    alternates: { canonical: `/${lang}/privacy`, languages: { en: "/en/privacy", es: "/es/privacy", "x-default": "/en/privacy" } },
+    alternates: { canonical: `/${lang}/privacy`, languages: { en: "/en/privacy", es: "/es/privacy", "x-default": "/privacy" } },
   };
 }
 
