@@ -14,7 +14,7 @@ npm run lint
 Copy `.env.example` to `.env.local` and fill in what you need. Every setting is optional:
 - `RESEND_API_KEY`: sends contact-form messages by email through Resend, from `website@semasys.xyz` (override with `CONTACT_FROM_EMAIL`). Without it the live form shows an error; locally, messages are printed in the terminal.
 - `CONTACT_EMAIL`: the address shown on the site (default hello@semasys.xyz, which forwards to Gmail through ImprovMX).
-- `CONTACT_FORM_TO`: the inbox that receives contact-form messages (default hello@semasys.xyz).
+- `CONTACT_FORM_TO`: the inbox that receives contact-form messages (default eduardcummins@gmail.com, sent direct rather than via the hello@ forwarding).
 - `SITE_URL`: public address, used for canonical links, the sitemap and the share image (defaults to the Vercel production domain).
 
 ## Where things are
