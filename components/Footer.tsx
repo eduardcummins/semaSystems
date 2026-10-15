@@ -18,6 +18,9 @@ export function Footer({ lang, d, nav }: { lang: Locale; d: Dict["footer"]; nav:
             <a href={`/${lang}#examples`}>{nav.examples}</a>
             <a href={`/${lang}#faq`}>{nav.faq}</a>
             <Link href={`/${lang}/privacy`}>{d.privacy}</Link>
+            <a href={config.linkedin} target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
           </nav>
           <div className="footer-end">
             <a href={`mailto:${config.contactEmail}`} className="email">
