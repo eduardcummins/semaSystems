@@ -26,6 +26,8 @@ export function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Section links are plain anchors: the browser scrolls to the section every time, even when the address
+  // already ends in that #section (a Next.js Link treats that as "already here" and does nothing).
   const links: [string, string][] = [
     ["how", nav.how],
     ["examples", nav.examples],
@@ -40,16 +42,16 @@ export function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }) {
         </Link>
         <nav className="links" aria-label={nav.label}>
           {links.map(([id, label]) => (
-            <Link key={id} href={`/${lang}#${id}`}>
+            <a key={id} href={`/${lang}#${id}`}>
               {label}
-            </Link>
+            </a>
           ))}
         </nav>
         <div className="bar-end">
           <LangSwitch lang={lang} name={nav.language} />
-          <Link href={`/${lang}#contact`} className="pill pill-sm">
+          <a href={`/${lang}#contact`} className="pill pill-sm">
             {nav.contact}
-          </Link>
+          </a>
           <button type="button" className="menu-btn" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
             <span className="sr-only">{open ? nav.close : nav.menu}</span>
             <span className="menu-icon" data-open={open ? "" : undefined} aria-hidden="true" />
@@ -59,9 +61,9 @@ export function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }) {
       {open && (
         <nav id="mobile-menu" className="mobile-menu" aria-label={nav.label} onClick={() => setOpen(false)}>
           {links.map(([id, label]) => (
-            <Link key={id} href={`/${lang}#${id}`}>
+            <a key={id} href={`/${lang}#${id}`}>
               {label}
-            </Link>
+            </a>
           ))}
         </nav>
       )}

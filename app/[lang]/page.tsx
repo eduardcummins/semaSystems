@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/content";
 import { config } from "@/lib/config";
@@ -78,9 +77,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {d.hero.audience}
             </p>
             <div className="hero-ctas rise" style={{ "--d": 2 } as React.CSSProperties}>
-              <Link href={`/${lang}#contact`} className="pill">
+              <a href={`/${lang}#contact`} className="pill">
                 {d.nav.contact}
-              </Link>
+              </a>
             </div>
           </div>
           <div className="hero-visual rise" style={{ "--d": 3 } as React.CSSProperties}>

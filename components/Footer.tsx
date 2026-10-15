@@ -14,9 +14,9 @@ export function Footer({ lang, d, nav }: { lang: Locale; d: Dict["footer"]; nav:
             <Logo size={30} />
           </Link>
           <nav aria-label={d.label} className="footer-links">
-            <Link href={`/${lang}#how`}>{nav.how}</Link>
-            <Link href={`/${lang}#examples`}>{nav.examples}</Link>
-            <Link href={`/${lang}#faq`}>{nav.faq}</Link>
+            <a href={`/${lang}#how`}>{nav.how}</a>
+            <a href={`/${lang}#examples`}>{nav.examples}</a>
+            <a href={`/${lang}#faq`}>{nav.faq}</a>
             <Link href={`/${lang}/privacy`}>{d.privacy}</Link>
           </nav>
           <div className="footer-end">
