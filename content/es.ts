@@ -3,9 +3,9 @@ import type { Dict } from "./types";
 // Spanish (Spain), formal "usted". Mirrors en.ts key for key; written to read naturally, not translated word for word.
 export const es: Dict = {
   meta: {
-    title: "Sema Systems: agentes de IA a medida e interactivos",
+    title: "Sema Systems | Agentes de IA a medida para pymes",
     description:
-      "Agentes de IA a medida para asesorías, aseguradoras y equipos pequeños. Creados con nuestro propio software y entregados como un flujo que su equipo puede leer y gestionar.",
+      "Sema Systems crea agentes de IA interactivos y a medida para asesorías, aseguradoras y pymes, entregados como un flujo visual que su equipo puede gestionar.",
     ogLocale: "es_ES",
   },
   nav: {

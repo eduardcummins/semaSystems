@@ -16,14 +16,30 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   if (!isLocale(lang)) notFound();
   const d = dictionaries[lang];
 
+  // Structured data for search engines. alternateName lists how people may type the brand, so searches like
+  // "sema sys" are matched to this site rather than corrected to a similar name.
+  const names = ["Semasys", "Sema Sys", "semasys.xyz"];
   const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Sema Systems",
+      alternateName: names,
+      url: config.siteUrl,
+      inLanguage: ["en", "es"],
+    },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Sema Systems",
+      alternateName: names,
       legalName: "Innovation Partners Ltd",
       url: config.siteUrl,
+      logo: `${config.siteUrl}/logo.png`,
+      description: d.meta.description,
       email: config.contactEmail,
+      areaServed: ["GB", "ES"],
+      knowsLanguage: ["en", "es", "ca"],
       sameAs: [config.linkedin],
     },
     {
