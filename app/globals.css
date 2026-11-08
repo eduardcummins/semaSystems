@@ -1262,9 +1262,11 @@ h1.display {
   opacity: 0;
 }
 
-/* The bot check is invisible unless Cloudflare asks the visitor to tick it; until then, cancel the form's gap. */
+/* The bot check is invisible unless Cloudflare asks the visitor to tick it; until then, keep it out of the layout. */
 .captcha:not(.shown) {
-  margin-top: -18px;
+  position: absolute;
+  height: 0;
+  overflow: hidden;
 }
 
 .consent {
