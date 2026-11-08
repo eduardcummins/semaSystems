@@ -187,7 +187,7 @@ export const es: Dict = {
   // LEGAL: redactada internamente para una pequeña empresa del Reino Unido. Debe revisarla un asesor legal antes de darla por buena.
   privacy: {
     title: "Política de privacidad",
-    updated: "Última actualización: 15 de octubre de 2026",
+    updated: "Última actualización: 8 de noviembre de 2026",
     back: "Volver al inicio",
     sections: [
       {
@@ -225,6 +225,7 @@ export const es: Dict = {
           [
             "Vercel aloja la web y proporciona los recuentos anónimos de visitas.",
             "Resend entrega en nuestro buzón los mensajes del formulario de contacto.",
+            "Cloudflare comprueba que los mensajes del formulario los envía una persona y no un programa automático. Para ello analiza datos técnicos de su navegador y su conexión, como la dirección IP.",
             "Google aloja nuestro correo electrónico.",
           ],
           "Estos proveedores actúan siguiendo nuestras instrucciones, conforme a sus condiciones de tratamiento de datos. Algunos tratan datos en Estados Unidos; en ese caso, nos acogemos a las garantías para transferencias desde el Reino Unido que recogen dichas condiciones.",

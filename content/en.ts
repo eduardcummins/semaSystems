@@ -187,7 +187,7 @@ export const en: Dict = {
   // LEGAL: written in-house for a small UK company. Have it checked by a legal adviser before relying on it.
   privacy: {
     title: "Privacy policy",
-    updated: "Last updated: 15 October 2026",
+    updated: "Last updated: 8 November 2026",
     back: "Back to home",
     sections: [
       {
@@ -225,6 +225,7 @@ export const en: Dict = {
           [
             "Vercel hosts the website and provides the anonymous visit counts.",
             "Resend delivers contact-form messages to our inbox.",
+            "Cloudflare checks that contact-form messages come from a person, not a bot. To do this it looks at technical details of your browser and connection, such as your IP address.",
             "Google hosts our email.",
           ],
           "These providers act on our instructions under data processing terms. Some of them process data in the United States. Where they do, we rely on the safeguards for transfers from the UK set out in those terms.",

@@ -2,6 +2,26 @@ import { config } from "@/lib/config";
 
 const clean = (v: unknown, max: number) => String(v ?? "").trim().slice(0, max);
 
+// Cloudflare Turnstile bot check. Skipped when TURNSTILE_SECRET_KEY is not set (e.g. locally).
+async function passesBotCheck(token: unknown, req: Request) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (typeof token !== "string" || !token) return false;
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim();
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: new URLSearchParams({ secret, response: token, ...(ip && { remoteip: ip }) }),
+    });
+    const data = (await res.json()) as { success?: boolean; "error-codes"?: string[] };
+    if (!data.success) console.warn("[contact] Bot check failed:", data["error-codes"]);
+    return data.success === true;
+  } catch (err) {
+    console.error("[contact] Bot check could not be reached:", err);
+    return false;
+  }
+}
+
 export async function POST(req: Request) {
   // JSON from the enhanced form, or a plain urlencoded POST when JavaScript is off.
   const isJson = (req.headers.get("content-type") ?? "").includes("application/json");
@@ -19,6 +39,7 @@ export async function POST(req: Request) {
   const email = clean(body?.email, 200);
   const task = clean(body?.task, 2000);
   if (!/^\S+@\S+\.\S+$/.test(email)) return respond(false);
+  if (!(await passesBotCheck(body?.["cf-turnstile-response"], req))) return respond(false, 403);
 
   const key = process.env.RESEND_API_KEY;
   if (!key) {
